@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 21:04:10 by user42            #+#    #+#             */
-/*   Updated: 2020/06/25 09:36:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/25 19:08:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,31 @@ char		*ft_create(int len)
 	while(i < len + 1)
 		ret[i++] = '\0'; 
 	return (ret);
+}
+
+int			ft_power(int nb, int power)
+{
+	if (power < 0)
+		return (-1);
+	if (power == 0)
+		return (1);
+	if (power == 1)
+		return (nb * 1);
+	return (ft_power(nb, 1) * ft_power(nb, power - 1));
+}
+
+char		*ft_lower_case(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 65 && str[i] <= 90)
+			str[i] += 32;
+		i++;
+	}
+	return (str);
 }
 
 size_t		ft_strlen(char *str)
