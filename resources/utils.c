@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 21:04:10 by user42            #+#    #+#             */
-/*   Updated: 2020/06/25 08:26:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/25 09:36:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void		ft_putstr(char *str)
 		ft_putchar(str[i]);
 }
 
-size_t		ft_count(int nb)
+size_t		ft_count(int nb, int base)
 {
 	int	i;
 
 	i = 0;
-	while(nb / 16 > 0)
+	while(nb / base > 0)
 	{
 		i++;
-		nb /= 16;
+		nb /= base;
 	}
 	return (i);
 }
