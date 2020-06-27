@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 01:46:14 by user42            #+#    #+#             */
-/*   Updated: 2020/06/25 19:10:34 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/26 19:51:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static char		*ft_parse(char *str)
 {
 	if (str[0] == '0' && str[1] != 'x')
 		return ("01234567");
-	else if (str[0] == '0'  && str[1] == 'x')
-		return ("0123456789abcdef");	
+	else if (str[0] == '0' && str[1] == 'x')
+		return ("0123456789abcdef");
 	else
 		return ("0123456789");
 }
@@ -50,16 +50,16 @@ void			ft_convertion_hexa(char *base, char *str)
 	y = ft_strlen(str) - 1;
 	tmp = 0;
 	str = ft_lower_case(str);
-	while(y > 0)
+	while (y > 0)
 	{
-		while(*str != base[i])
+		while (*str != base[i])
 			i++;
 		tmp += ft_power(16, y) * i;
 		i = 0;
 		y--;
 		str++;
 	}
-	while(*str != base[i])
+	while (*str != base[i])
 		i++;
 	tmp += i;
 	ft_putstr(ft_itoa(tmp));
@@ -68,14 +68,22 @@ void			ft_convertion_hexa(char *base, char *str)
 void			ft_convertion_i(char *str)
 {
 	char	*base;
-	int	nb;
-	int	i;
+	int		nb;
+	int		i;
 
 	i = 0;
-	base = ft_parse(str);
-	if (*str == '0' )
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			ft_putchar('-');
 		str++;
-	if (*str == 'x')
+		if ((*str == '+' || *str == '-') && *str != *(str - 1))
+			str++;
+	}
+	base = ft_parse(str);
+	if (*str == '0' && *(str + 1))
+		str++;
+	if (*str == 'x' || *str == 'X')
 		str++;
 	if (ft_strlen(base) == 8)
 		ft_convertion_octal(str, base);
@@ -83,13 +91,4 @@ void			ft_convertion_i(char *str)
 		ft_convertion_hexa(base, str);
 	else if (ft_strlen(base) == 10)
 		ft_putstr(str);
-}
-
-int		main(int argc, char **argv)
-{
-	ft_putstr("mon printf = ");
-	ft_convertion_i(argv[1]);
-	ft_putchar('\n');
-	printf("vrai printf = %i\n", 0xA);
-	return (0);
 }
