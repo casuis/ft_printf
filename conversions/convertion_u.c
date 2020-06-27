@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:23:04 by user42            #+#    #+#             */
-/*   Updated: 2020/06/27 02:26:34 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/27 18:25:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-unsigned int	ft_count_nb(unsigned int nb)
+size_t		ft_count_nb(unsigned int nb)
 {
 	unsigned int	ret;
 
@@ -39,11 +39,11 @@ char		*ft_new(size_t len)
 	return (ret);
 }
 
-char			*ft_itoa2(unsigned int nb)
+char		*ft_itoa2(unsigned int nb)
 {
-	unsigned int		i;
-	int		neg;
-	char	*ret;
+	int				neg;
+	char			*ret;
+	unsigned int	i;
 
 	i = 0;
 	neg = 0;
@@ -68,7 +68,5 @@ char			*ft_itoa2(unsigned int nb)
 
 void		ft_convertion_u(unsigned int nb)
 {
-
 	ft_putstr(ft_itoa2(nb));
-
 }
