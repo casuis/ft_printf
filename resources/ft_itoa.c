@@ -6,12 +6,13 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 20:53:26 by user42            #+#    #+#             */
-/*   Updated: 2020/06/14 20:56:35 by user42           ###   ########.fr       */
+/*   Updated: 2020/06/27 19:16:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../printf.h"
 
-size_t		ft_count_nb(int nb)
+size_t			ft_count_nb(int nb)
 {
 	int	ret;
 
@@ -21,17 +22,6 @@ size_t		ft_count_nb(int nb)
 		nb /= 10;
 		ret++;
 	}
-	return (ret);
-}
-
-char		*ft_new(size_t len)
-{
-	char	*ret;
-
-	if (!len)
-		return (NULL);
-	if (!(ret = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
 	return (ret);
 }
 
@@ -51,7 +41,7 @@ char			*ft_itoa(int nb)
 		i += 1;
 		neg = 1;
 	}
-	ret = ft_new((i += ft_count_nb(nb)));
+	ret = ft_create((i += ft_count_nb(nb)));
 	ret[i--] = '\0';
 	while (nb >= 10)
 	{
