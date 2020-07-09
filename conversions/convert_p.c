@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convertion_x.c                                     :+:      :+:    :+:   */
+/*   convert_p.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/20 11:41:05 by user42            #+#    #+#             */
-/*   Updated: 2020/06/27 17:55:14 by user42           ###   ########.fr       */
+/*   Created: 2020/06/27 18:26:52 by user42            #+#    #+#             */
+/*   Updated: 2020/06/27 18:31:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../resources/utils.c"
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 
-void		ft_convertion_x(int ptr)
+void		ft_convert_p(void *p)
 {
-	char		*base;
-	char		*ret;
-	int			i;
+	unsigned long	adr;
+	char const		*base;
+	char			res[9];
+	int				i;
 
-	i = ft_count(ptr, 16);
-	ret = ft_create(i + 1);
+	adr = (unsigned long)p;
 	base = "0123456789abcdef";
-	while (ptr / 16 > 0)
+	i = 8;
+	while ((adr / 16) > 0 || i >= 8)
 	{
-		ret[i] = base[ptr % 16];
-		ptr /= 16;
+		res[i] = base[(adr % 16)];
+		adr /= 16;
 		i--;
 	}
-	ret[i] = base[ptr % 16];
-	ft_putstr(ret);
-	free(ret);
+	res[i] = base[(adr % 16)];
+	ft_putstr("0x");
+	while (i < 9)
+		ft_putchar(res[i++]);
 }

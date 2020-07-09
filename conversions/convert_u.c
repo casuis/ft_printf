@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../resources/utils.c"
+#include "../resources/ft_utils.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -66,7 +66,7 @@ char		*ft_itoa2(unsigned int nb)
 	return (ret);
 }
 
-void		ft_convertion_u(unsigned int nb)
+void		ft_convert_u(unsigned int nb)
 {
 	ft_putstr(ft_itoa2(nb));
 }

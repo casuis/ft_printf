@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convertion_i.c                                     :+:      :+:    :+:   */
+/*   convert_i.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 01:46:14 by user42            #+#    #+#             */
-/*   Updated: 2020/06/26 19:51:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/07/09 02:38:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char		*ft_parse(char *str)
 		return ("0123456789");
 }
 
-void			ft_convertion_octal(char *str, char *base)
+void			ft_convert_octal(char *str, char *base)
 {
 	int	tmp;
 	int	i;
@@ -40,7 +40,7 @@ void			ft_convertion_octal(char *str, char *base)
 	ft_putstr(ft_itoa(tmp));
 }
 
-void			ft_convertion_hexa(char *base, char *str)
+void			ft_convert_hexa(char *base, char *str)
 {
 	int	i;
 	int	tmp;
@@ -65,7 +65,7 @@ void			ft_convertion_hexa(char *base, char *str)
 	ft_putstr(ft_itoa(tmp));
 }
 
-void			ft_convertion_i(char *str)
+void			ft_convert_i(char *str)
 {
 	char	*base;
 	int		nb;
@@ -86,9 +86,9 @@ void			ft_convertion_i(char *str)
 	if (*str == 'x' || *str == 'X')
 		str++;
 	if (ft_strlen(base) == 8)
-		ft_convertion_octal(str, base);
+		ft_convert_octal(str, base);
 	else if (ft_strlen(base) == 16)
-		ft_convertion_hexa(base, str);
+		ft_convert_hexa(base, str);
 	else if (ft_strlen(base) == 10)
 		ft_putstr(str);
 }

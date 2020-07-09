@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convertion_d.c                                     :+:      :+:    :+:   */
+/*   convert_d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "../resources/ft_itoa.c"
-#include "../resources/utils.c"
+#include "../resources/ft_utils.c"
 
 void		ft_convert_d(int nb)
 {
