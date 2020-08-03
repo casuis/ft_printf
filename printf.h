@@ -27,7 +27,7 @@ char		*ft_lower_case(char *str);
 char		*ft_upper_case(char *str);
 int		ft_atoi(char *str);
 char		*ft_itoa(int nb);
-char		ft_convert_c(char c);
+void		ft_convert_c(char c);
 void		ft_convert_d(int nb);
 void		ft_convert_i(char *str);
 void		ft_convert_p(void *p);
