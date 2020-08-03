@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../resources/ft_utils.c"
+#include "../printf.h"
 
 void		ft_convert_x(int ptr)
 {

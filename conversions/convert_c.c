@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../resources/utils.c"
+#include "../printf.h"
 
-char		ft_convert_c(char c)
+void		ft_convert_c(char c)
 {
-	ft_putchar(1, &c, 1);
+	ft_putchar(c);
 }

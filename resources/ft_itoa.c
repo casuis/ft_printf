@@ -12,7 +12,7 @@
 
 #include "../printf.h"
 
-size_t			ft_count_nb(int nb)
+static size_t			ft_count_nb(int nb)
 {
 	int	ret;
 

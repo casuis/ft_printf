@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../resources/utils.c"
-#include "../resources/ft_itoa.c"
+#include "../printf.h"
 
 static char		*ft_parse(char *str)
 {

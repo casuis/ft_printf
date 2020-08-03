@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "../resources/ft_itoa.c"
-#include "../resources/ft_utils.c"
+#include "../printf.h"
 
 void		ft_convert_d(int nb)
 {

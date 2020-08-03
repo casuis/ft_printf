@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../resources/ft_utils.c"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "../printf.h"
 
 size_t		ft_count_nb(unsigned int nb)
 {
