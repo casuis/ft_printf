@@ -31,7 +31,7 @@ size_t		ft_count(int nb, int base)
 	int	i;
 
 	i = 0;
-	while(nb / base > 0)
+	while (nb / base > 0)
 	{
 		i++;
 		nb /= base;
