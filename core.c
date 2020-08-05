@@ -3,32 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 01:30:50 by user42            #+#    #+#             */
-/*   Updated: 2020/07/09 02:36:09 by user42           ###   ########.fr       */
+/*   Created: 2020/08/05 17:13:37 by asimon            #+#    #+#             */
+/*   Updated: 2020/08/05 17:20:01 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "printf.h"
-
-static char		*ft_create_table()
-{
-	char	*ret;
-
-	if (!(ret = malloc(sizeof(char) * 9)))
-		return (NULL);
-	ret[0] = 'c';
-	ret[1] = 'x';
-	ret[2] = 'X';
-	ret[3] = 'u';
-	ret[4] = 'p';
-	ret[5] = 'd';
-	ret[6] = 'i';
-	ret[7] = 's';
-	ret[8] = '\0';
-	return (ret);
-}
 
 static int		ft_count_arg(char *str)
 {
@@ -53,6 +36,7 @@ static int		ft_count_arg(char *str)
 			buff_i = 0;
 		}
 	}
+	free(buff);
 	return (ret);
 }
 
@@ -74,11 +58,15 @@ static void		ft_parse_convert(char *c, va_list ap)
 		ft_convert_i(va_arg(ap, char*));
 	if (*c == 's')
 		ft_convert_s(va_arg(ap, char*));
-	if (*c == '0')
-		ft_flag(c + 1);
 }
 
-int		ft_printf(char *str, ...)
+static void		ft_parse_flag(char *c, va_list ap)
+{
+	if (*c >='0' && *c <= '9')
+		ft_check_flag(c, ap);
+}
+
+int		ft_core(char *str, ...)
 {
 	unsigned int	i;
 	unsigned int	y;
@@ -90,21 +78,15 @@ int		ft_printf(char *str, ...)
 	y = ft_count_arg(str);
 	while (str[i])
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && y > 0)
 		{
 			ft_parse_convert((str + (++i)), ap);
+			y--;
 			if (str[i + 1] != '\0')
 				i++;
 		}
 		else if (str[i] != '\0')
-			ft_putchar(str[i]);
-		i++;
+			ft_putchar(str[i++]);
 	}
 	return (1);
-}
-
-int			main(int argc, char **argv)
-{
-	ft_printf("salut %d", atoi(argv[1]));
-	return (0);
 }
