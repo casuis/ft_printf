@@ -6,14 +6,14 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:12:45 by asimon            #+#    #+#             */
-/*   Updated: 2020/08/06 15:58:14 by asimon           ###   ########.fr       */
+/*   Updated: 2020/08/06 16:57:34 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
 
-static void		ft_flag_spacing(char *str, int count, char c)
+void		ft_flag_spacing(char *str, int count, char c)
 {
 	int		i;
 	int		nb;
@@ -32,7 +32,7 @@ static void		ft_flag_spacing(char *str, int count, char c)
 	}
 }
 
-static void		ft_flag_spacing_arg(va_list ap)
+void		ft_flag_spacing_arg(va_list ap)
 {
 	int		i;
 	int		buff;
@@ -46,19 +46,11 @@ static void		ft_flag_spacing_arg(va_list ap)
 	}
 }
 
-void		ft_check_flag(char *str, va_list ap)
+void		ft_flag_position(va_list ap, char *str)
 {
 	int		i;
-	int		count;
-	int		nb;
-	
+
 	i = 0;
-	nb = va_arg(ap, int);
-	count = ft_count(nb, 10) + 1;
-	if (str[i] == '0')
-		ft_flag_spacing(&(str[i + 1]), count, '0');
-	if (str[i] > '0')
-		ft_flag_spacing(&(str[i]), count, ' ');
-	if (str[i] == '*')
-		ft_flag_spacing_arg(ap);
+	while ((ft_parse_convert(str[i], ap) != 1) && str[i] != ' ')
+		i++;
 }
