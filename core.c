@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:13:37 by asimon            #+#    #+#             */
-/*   Updated: 2020/08/05 17:20:01 by asimon           ###   ########.fr       */
+/*   Updated: 2020/08/06 16:13:08 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,32 +38,6 @@ static int		ft_count_arg(char *str)
 	}
 	free(buff);
 	return (ret);
-}
-
-static void		ft_parse_convert(char *c, va_list ap)
-{
-	if (*c == 'c')
-		ft_convert_c(va_arg(ap, int));
-	if (*c == 'x')
-		ft_convert_x(va_arg(ap, int));
-	if (*c == 'X')
-		ft_convert_xx(va_arg(ap, int));
-	if (*c == 'u')
-		ft_convert_u(va_arg(ap, unsigned int));
-	/*if (c == 'p')
-		ft_convert_p(va_arg(ap, void));*/
-	if (*c == 'd')
-		ft_convert_d(va_arg(ap, int));
-	if (*c == 'i')
-		ft_convert_i(va_arg(ap, char*));
-	if (*c == 's')
-		ft_convert_s(va_arg(ap, char*));
-}
-
-static void		ft_parse_flag(char *c, va_list ap)
-{
-	if (*c >='0' && *c <= '9')
-		ft_check_flag(c, ap);
 }
 
 int		ft_core(char *str, ...)
