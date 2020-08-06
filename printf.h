@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 19:07:44 by user42            #+#    #+#             */
-/*   Updated: 2020/08/06 16:14:01 by asimon           ###   ########.fr       */
+/*   Updated: 2020/08/06 23:36:07 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,10 @@ void		ft_convert_x(int ptr);
 void		ft_convert_xx(int ptr);
 char		*ft_create_table();
 void		ft_check_flag(char *str, va_list ap);
+void		ft_flag_position(va_list ap, char *str);
+int		ft_parse_convert(char *c, va_list ap);
+void		ft_flag_spacing(char *str, int count, char c);
+void		ft_flag_spacing_arg(va_list ap);
+void		ft_parse_flag(char *c, va_list ap);
 
 #endif
