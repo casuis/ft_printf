@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 19:07:44 by user42            #+#    #+#             */
-/*   Updated: 2020/08/05 14:20:31 by asimon           ###   ########.fr       */
+/*   Updated: 2020/08/06 16:14:01 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ void		ft_convert_u(unsigned int nb);
 void		ft_convert_x(int ptr);
 void		ft_convert_xx(int ptr);
 char		*ft_create_table();
+void		ft_check_flag(char *str, va_list ap);
 
 #endif
