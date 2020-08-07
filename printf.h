@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 19:07:44 by user42            #+#    #+#             */
-/*   Updated: 2020/08/06 23:36:07 by asimon           ###   ########.fr       */
+/*   Updated: 2020/08/07 02:14:19 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ char		*ft_lower_case(char *str);
 char		*ft_upper_case(char *str);
 int		ft_atoi(char *str);
 char		*ft_itoa(int nb);
-void		ft_convert_c(char c);
-void		ft_convert_d(int nb);
-void		ft_convert_i(char *str);
-void		ft_convert_p(void *p);
-void		ft_convert_s(char *str);
-void		ft_convert_u(unsigned int nb);
-void		ft_convert_x(int ptr);
-void		ft_convert_xx(int ptr);
+size_t		ft_convert_c(char c);
+size_t		ft_convert_d(int nb);
+size_t		ft_convert_i(char *str);
+size_t		ft_convert_p(void *p);
+size_t		ft_convert_s(char *str);
+size_t		ft_convert_u(unsigned int nb);
+size_t		ft_convert_x(int ptr);
+size_t		ft_convert_xx(int ptr);
 char		*ft_create_table();
 void		ft_check_flag(char *str, va_list ap);
 void		ft_flag_position(va_list ap, char *str);
