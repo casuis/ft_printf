@@ -6,13 +6,14 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 14:18:24 by user42            #+#    #+#             */
-/*   Updated: 2020/07/09 02:37:35 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/07 02:23:45 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-void		ft_convert_c(char c)
+size_t		ft_convert_c(char c)
 {
 	ft_putchar(c);
+	return (1);
 }

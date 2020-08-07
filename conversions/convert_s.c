@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_s.c                                     :+:      :+:    :+:   */
+/*   convert_s.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 14:25:25 by user42            #+#    #+#             */
-/*   Updated: 2020/06/16 14:26:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/07 02:18:03 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-void		ft_convert_s(char *str)
+size_t		ft_convert_s(char *str)
 {
+	size_t		ret;
+
+	ret = ft_strlen(str);
 	ft_putstr(str);
+
+	return (ret);
 }

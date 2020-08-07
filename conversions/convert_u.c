@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convertion_u.c                                     :+:      :+:    :+:   */
+/*   convert_u.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:23:04 by user42            #+#    #+#             */
-/*   Updated: 2020/06/27 18:25:23 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/07 02:16:39 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,22 @@ char		*ft_itoa2(unsigned int nb)
 	return (ret);
 }
 
-void		ft_convert_u(unsigned int nb)
+size_t		ft_convert_u(unsigned int nb)
 {
-	ft_putstr(ft_itoa2(nb));
+	char		*buff;
+	size_t		ret;
+	
+	buff = ft_itoa2(nb);
+	ret = ft_strlen(buff);
+	ft_putstr(buff);
+
+	return (ret);
 }
+
+
+
+
+
+
+
+

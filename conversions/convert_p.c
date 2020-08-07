@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_p.c                                     :+:      :+:    :+:   */
+/*   convert_p.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 18:26:52 by user42            #+#    #+#             */
-/*   Updated: 2020/06/27 18:31:02 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/07 02:18:45 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-void		ft_convert_p(void *p)
+size_t		ft_convert_p(void *p)
 {
 	unsigned long	adr;
 	char const		*base;
@@ -32,4 +32,5 @@ void		ft_convert_p(void *p)
 	ft_putstr("0x");
 	while (i < 9)
 		ft_putchar(res[i++]);
+	return (8);
 }

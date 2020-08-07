@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 01:46:14 by user42            #+#    #+#             */
-/*   Updated: 2020/07/09 02:38:59 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/07 03:47:23 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static char		*ft_parse(char *str)
 		return ("0123456789");
 }
 
-void			ft_convert_octal(char *str, char *base)
+size_t			ft_convert_octal(char *str, char *base)
 {
-	int	tmp;
-	int	i;
+	int		tmp;
+	int		i;
 
 	tmp = 0;
 	i = ft_strlen(str) - 1;
@@ -37,9 +37,10 @@ void			ft_convert_octal(char *str, char *base)
 	}
 	tmp += *str - 48;
 	ft_putstr(ft_itoa(tmp));
+	return (ft_strlen(ft_itoa(tmp)));
 }
 
-void			ft_convert_hexa(char *base, char *str)
+size_t			ft_convert_hexa(char *base, char *str)
 {
 	int	i;
 	int	tmp;
@@ -62,9 +63,10 @@ void			ft_convert_hexa(char *base, char *str)
 		i++;
 	tmp += i;
 	ft_putstr(ft_itoa(tmp));
+	return (ft_strlen(ft_itoa(tmp)));
 }
 
-void			ft_convert_i(char *str)
+size_t			ft_convert_i(char *str)
 {
 	char	*base;
 	int		nb;
@@ -85,9 +87,10 @@ void			ft_convert_i(char *str)
 	if (*str == 'x' || *str == 'X')
 		str++;
 	if (ft_strlen(base) == 8)
-		ft_convert_octal(str, base);
+		return (ft_convert_octal(str, base));
 	else if (ft_strlen(base) == 16)
-		ft_convert_hexa(base, str);
+		return (ft_convert_hexa(base, str));
 	else if (ft_strlen(base) == 10)
 		ft_putstr(str);
+	return (ft_strlen(str));
 }
