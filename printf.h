@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 19:07:44 by user42            #+#    #+#             */
-/*   Updated: 2020/08/07 02:14:19 by asimon           ###   ########.fr       */
+/*   Updated: 2020/09/15 18:04:58 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,25 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+
+typedef struct		s_flag
+{
+	int		minus;
+	int		mark;
+	int		star;
+	int		zero;
+	char	conv;
+	int		min_size;
+	int		max_size;
+	size_t	count;
+}					t_flag;
+
+typedef struct		s_struct
+{
+	t_flag	*flag_info;
+	char	*ret;
+	int		last_one;
+}					t_struct;
 
 void		ft_putchar(char c);
 void		ft_putstr(char *str);
@@ -41,6 +60,13 @@ void		ft_flag_position(va_list ap, char *str);
 int		ft_parse_convert(char *c, va_list ap);
 void		ft_flag_spacing(char *str, int count, char c);
 void		ft_flag_spacing_arg(va_list ap);
-void		ft_parse_flag(char *c, va_list ap);
+void		ft_parse_flag(t_struct *buff);
+t_flag		*ft_parse_flag_buffer(t_flag *flag_buffer, char *str);
+char		ft_send_conv(char c);
+char		ft_find_conv(char *str, t_struct *buffer);
+int			ft_print_casu(char *str, t_struct *buffer);
+t_struct		*ft_init(int count_arg);
+t_flag		*ft_parse_mark_minus(char *str, t_flag *flag_buffer);
+t_flag		*ft_parse_flag_buffer(t_flag *flag_buffer, char *str);
 
 #endif

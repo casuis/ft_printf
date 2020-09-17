@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:12:45 by asimon            #+#    #+#             */
-/*   Updated: 2020/08/07 03:57:46 by asimon           ###   ########.fr       */
+/*   Updated: 2020/09/15 18:11:55 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,20 @@ void		ft_flag_position(va_list ap, char *str)
 	int		count;
 
 	i = 0;
-	while (((count = ft_parse_convert(&str[i], ap)) <0) && str[i] != ' ')
+	while (((count = ft_parse_convert(&str[i], ap)) < 0) && str[i] != ' ')
 		i++;
 	i = 0;
 	str = &str[i + 1];
 	ft_flag_spacing(str, count, ' ');
 }
 
-void		ft_fct_test(char *str, ...)
+void		ft_flag_mark(t_flag *flag_buffer)
 {
-	va_list		ap;
+	int		min;
+	int		max;
 
-	va_start(ap, str);
-	ft_flag_position(ap, str);
-	va_end(ap);
-}
-
-int			main(int argc, char **argv)
-{
-	ft_fct_test(argv[1], atoi(argv[2]), argv[3]);
-	return (0);
+	min = flag_buffer -> min_size;
+	max = flag_buffer -> max_size;
+	if (min > max)
+		
 }

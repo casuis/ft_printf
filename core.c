@@ -6,13 +6,14 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:13:37 by asimon            #+#    #+#             */
-/*   Updated: 2020/08/06 16:13:08 by asimon           ###   ########.fr       */
+/*   Updated: 2020/08/18 18:36:03 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "printf.h"
 
+// compter tous les args
 static int		ft_count_arg(char *str)
 {
 	int		str_i;
@@ -42,25 +43,12 @@ static int		ft_count_arg(char *str)
 
 int		ft_core(char *str, ...)
 {
-	unsigned int	i;
-	unsigned int	y;
+	int			count_arg;
+	t_struct	*buff;
 	va_list		ap;
-	void		*tmp;
 
-	i = 0;
 	va_start(ap, str);
-	y = ft_count_arg(str);
-	while (str[i])
-	{
-		if (str[i] == '%' && y > 0)
-		{
-			ft_parse_convert((str + (++i)), ap);
-			y--;
-			if (str[i + 1] != '\0')
-				i++;
-		}
-		else if (str[i] != '\0')
-			ft_putchar(str[i++]);
-	}
-	return (1);
+	count_arg = ft_count_arg(str);
+	buff = ft_init(count_arg);
+	ft_parse_flag_buffer(buff -> flag_info, str);
 }
