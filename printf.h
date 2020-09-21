@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 19:07:44 by user42            #+#    #+#             */
-/*   Updated: 2020/09/15 18:04:58 by asimon           ###   ########.fr       */
+/*   Updated: 2020/09/21 10:03:38 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ size_t		ft_convert_x(int ptr);
 size_t		ft_convert_xx(int ptr);
 char		*ft_create_table();
 void		ft_check_flag(char *str, va_list ap);
-void		ft_flag_position(va_list ap, char *str);
 int		ft_parse_convert(char *c, va_list ap);
 void		ft_flag_spacing(char *str, int count, char c);
-void		ft_flag_spacing_arg(va_list ap);
+void		ft_flag_spacing_arg(const t_flag *flag_buffer);
+void		ft_flag_position(const t_flag *flag_buffer, char *str);
 void		ft_parse_flag(t_struct *buff);
 t_flag		*ft_parse_flag_buffer(t_flag *flag_buffer, char *str);
 char		ft_send_conv(char c);
@@ -68,5 +68,6 @@ int			ft_print_casu(char *str, t_struct *buffer);
 t_struct		*ft_init(int count_arg);
 t_flag		*ft_parse_mark_minus(char *str, t_flag *flag_buffer);
 t_flag		*ft_parse_flag_buffer(t_flag *flag_buffer, char *str);
+t_flag		*ft_recup_min_max(char *str, const t_flag *flag_buffer);
 
 #endif
