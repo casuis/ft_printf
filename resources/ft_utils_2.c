@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 14:15:34 by asimon            #+#    #+#             */
-/*   Updated: 2020/08/05 14:32:07 by asimon           ###   ########.fr       */
+/*   Updated: 2020/09/18 14:15:14 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,20 @@ char		*ft_create_table()
 	return (ret);
 }
 
-
+t_flag			*ft_recup_min_max(char *str, const t_flag *flag_buffer)
+{
+	int			i;
+	t_flag		*ret;
+	
+	i = 0;
+	ret = (t_flag*)flag_buffer;
+	if (str[0] == '*')
+	{
+		while (str[i] && str[i] != ' ' && str[i] != '.')
+			i++;
+		ret -> max_size = ft_atoi(&str[i + 1]);
+	}
+	else
+		ret -> min_size = ft_atoi(&str[i]);
+	return (ret);
+}

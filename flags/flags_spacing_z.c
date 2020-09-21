@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:12:45 by asimon            #+#    #+#             */
-/*   Updated: 2020/09/15 18:11:55 by asimon           ###   ########.fr       */
+/*   Updated: 2020/09/21 10:07:09 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void		ft_flag_spacing(char *str, int count, char c)
 	}
 }
 
-void		ft_flag_spacing_arg(va_list ap)
+void		ft_flag_spacing_arg(const t_flag *flag_buffer)
 {
 	int		i;
 	int		buff;
 
 	i = 0;
-	buff = va_arg(ap, int);
+	buff = flag_buffer -> count;
 	while (i <  buff)
 	{
 		ft_putchar(' ');
@@ -46,27 +46,8 @@ void		ft_flag_spacing_arg(va_list ap)
 	}
 }
 
-void		ft_flag_position(va_list ap, char *str)
+void		ft_flag_position(const t_flag *flag_buffer, char *str)
 {
-	int		i;
-	int		buff;
-	int		count;
 
-	i = 0;
-	while (((count = ft_parse_convert(&str[i], ap)) < 0) && str[i] != ' ')
-		i++;
-	i = 0;
-	str = &str[i + 1];
-	ft_flag_spacing(str, count, ' ');
-}
-
-void		ft_flag_mark(t_flag *flag_buffer)
-{
-	int		min;
-	int		max;
-
-	min = flag_buffer -> min_size;
-	max = flag_buffer -> max_size;
-	if (min > max)
-		
+	ft_flag_spacing(str, flag_buffer -> count, ' ');
 }
