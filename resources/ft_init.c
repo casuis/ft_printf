@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:27:50 by asimon            #+#    #+#             */
-/*   Updated: 2020/09/15 16:49:49 by asimon           ###   ########.fr       */
+/*   Updated: 2020/09/24 13:39:02 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_struct		*ft_init(int count_arg)
 	t_flag		*flag_buffer;
 
 	buff = ft_create_buffer(count_arg);
-	flag_buffer = buff -> flag_info;
-	flag_buffer = ft_create_flag_buffer(flag_buffer);
+	flag_buffer = ft_create_flag_buffer(buff -> flag_info);
 	return (buff);
 }
