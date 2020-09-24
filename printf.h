@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 19:07:44 by user42            #+#    #+#             */
-/*   Updated: 2020/09/21 10:03:38 by asimon           ###   ########.fr       */
+/*   Updated: 2020/09/24 13:36:15 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct		s_flag
 	char	conv;
 	int		min_size;
 	int		max_size;
-	size_t	count;
+	int		count;
 }					t_flag;
 
 typedef struct		s_struct
@@ -69,5 +69,6 @@ t_struct		*ft_init(int count_arg);
 t_flag		*ft_parse_mark_minus(char *str, t_flag *flag_buffer);
 t_flag		*ft_parse_flag_buffer(t_flag *flag_buffer, char *str);
 t_flag		*ft_recup_min_max(char *str, const t_flag *flag_buffer);
+t_flag		*ft_parse_core(char *str, t_struct *buffer, va_list ap);
 
 #endif
