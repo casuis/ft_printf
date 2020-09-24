@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:37:00 by asimon            #+#    #+#             */
-/*   Updated: 2020/09/15 17:46:03 by asimon           ###   ########.fr       */
+/*   Updated: 2020/09/24 14:50:18 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ char		ft_send_conv(char c)
 	return (-1);
 }
 
-int			ft_core_conv(t_struct *buffer, char *str)
+int			ft_core_conv(t_struct *buff, char *str, va_list ap)
 {
 	t_flag		*flag_buffer;
 	int			i;
 
 	i = -1;
-	flag_buffer = buffer -> flag_info;
-	flag_buffer = ft_parse_flag_buffer(flag_buffer, str);
+	flag_buffer = buff -> flag_info;
+	flag_buffer = ft_parse_core(str, buff, ap);
 	while (str[++i] != ' ' && str[i])
 		if (ft_send_conv(str[i]) != 0 && ft_send_conv(str[i]) != -1)
 			flag_buffer -> conv = ft_send_conv(str[i]);
@@ -51,13 +51,46 @@ int			ft_core_conv(t_struct *buffer, char *str)
 	return (0);
 }
 
-void		ft_read_casu(char *str, t_struct *buff)
+void		ft_read_casu(char *str, t_struct *buff, va_list ap)
 {
-	while (*str)
+	int		i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (*str != '%')
-			ft_puchar(*str);
-		else if (ft_core_conv(buff, str) == 1)
-			ft_parse_conv();
+		if (str[i] == '%' && str[i + 1] == '%')
+		{
+			ft_putchar('%');
+			i += 2;
+		}
+		else if (ft_core_conv(buff, &str[i + 1], ap) == 1 && str[i] == '%')
+			ft_parse_str_core(str, buff, ap);
+		else
+			ft_putchar(str[i]);
 	}
+}
+
+void			ft_test(char *str, ...)
+{
+	va_list		ap;
+	t_struct		*buff;
+	t_flag			*flag_buffer;
+	int				ret;
+
+	if (!(buff = malloc(sizeof(t_struct) * 1)))
+		return ;
+	if (!(buff -> flag_info = malloc(sizeof(t_flag) * 1)))
+		return ;
+	va_start(ap, str);
+	ret = ft_core_conv(buff, str, ap);
+	flag_buffer = buff -> flag_info;
+	printf("conv : %c\ncount: %d\nmin_size: %d\nmax_size: %d\nzero: %d\nret: %d\n", flag_buffer -> conv, flag_buffer -> count, flag_buffer -> min_size, flag_buffer -> max_size, flag_buffer -> zero, ret);
+	va_end(ap);
+	free(buff);
+	free(flag_buffer);
+}
+int			main(int argc, char **argv)
+{
+	ft_test(argv[1], atoi(argv[2]), atoi(argv[3]));
+	return (0);
 }
