@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:12:45 by asimon            #+#    #+#             */
-/*   Updated: 2020/10/01 17:48:22 by asimon           ###   ########.fr       */
+/*   Updated: 2020/10/01 18:06:57 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,24 @@ void		ft_flag_spacing_arg(const t_flag *flag_buffer, va_list ap)
 	}
 }
 
-void		ft_flag_spacing_mark(const t_flag *flag_buffer)
+void		ft_flag_spacing_mark(const t_flag *flag_buffer, int min, int max)
 {
-	int		min;
-	int		max;
 	int		count;
 
-	min = flag_buffer->min_size;
-	max = flag_buffer->max_size;
 	if (max > min)
 	{
 		count = (flag_buffer->count_conv) - max;
+		ft_flag_spacing(count, '0');
+		ft_putstr(flag_buffer->ret_conv);
 
 	}
 	if (min > max)
 	{
 		count = (flag_buffer->count_conv) - min;
 		ft_flag_spacing(min - max, ' ');
+		ft_flag_spacing(count, '0');
+		ft_putstr(flag_buffer->ret_conv);
 	}
-	if (max > min)
 }
 
 void		ft_flag_position(char *str, const t_flag *flag_buffer, va_list ap)
@@ -81,9 +80,9 @@ void		ft_flag_position(char *str, const t_flag *flag_buffer, va_list ap)
 	else if (flag_buffer->mark == 1)
 	{
 		if (flag_buffer->star > 0)
-			ft_flag_spacing_arg(flag_buffer, ap);
+			ft_flag_spacing_mark(flag_buffer, va_arg(ap, int), va_arg(ap, int));
 		else if (flag_buffer->star < 0)
-			flags_spacing_
+			flags_spacing_mark(flag_buffer, flag_buffer->min_size, flag_buffer-> max_size);
 	}
 
 }
