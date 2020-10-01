@@ -6,39 +6,35 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:12:45 by asimon            #+#    #+#             */
-/*   Updated: 2020/09/21 10:07:09 by asimon           ###   ########.fr       */
+/*   Updated: 2020/10/01 17:48:22 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
 
-void		ft_flag_spacing(char *str, int count, char c)
+void		ft_flag_spacing(int count, char c)
 {
 	int		i;
-	int		nb;
 
 	i = 0;
-	nb = 0;
-	if (str[i] >= '0' && str[i] <= '9')
+	if (count > 0)
 	{
-		while (str[i] >= '0' && str[i] <= '9')
-			nb = (nb * 10) + (str[i++] - 48);
-		while (count < nb)
+		while (i > count)
 		{
 			ft_putchar(c);
-			count++;
+			i++;
 		}
 	}
 }
 
-void		ft_flag_spacing_arg(const t_flag *flag_buffer)
+void		ft_flag_spacing_arg(const t_flag *flag_buffer, va_list ap)
 {
 	int		i;
 	int		buff;
 
 	i = 0;
-	buff = flag_buffer -> count;
+	buff = flag_buffer->count;
 	while (i <  buff)
 	{
 		ft_putchar(' ');
@@ -46,8 +42,48 @@ void		ft_flag_spacing_arg(const t_flag *flag_buffer)
 	}
 }
 
-void		ft_flag_position(const t_flag *flag_buffer, char *str)
+void		ft_flag_spacing_mark(const t_flag *flag_buffer)
 {
+	int		min;
+	int		max;
+	int		count;
 
-	ft_flag_spacing(str, flag_buffer -> count, ' ');
+	min = flag_buffer->min_size;
+	max = flag_buffer->max_size;
+	if (max > min)
+	{
+		count = (flag_buffer->count_conv) - max;
+
+	}
+	if (min > max)
+	{
+		count = (flag_buffer->count_conv) - min;
+		ft_flag_spacing(min - max, ' ');
+	}
+	if (max > min)
+}
+
+void		ft_flag_position(char *str, const t_flag *flag_buffer, va_list ap)
+{
+	int			count;
+	t_flag		*buffer;
+
+	buffer = (t_flag *)flag_buffer;
+	count = (flag_buffer->count) - (flag_buffer->count_conv);
+	if (flag_buffer->minus == 1)
+	{
+		ft_putstr(flag_buffer->ret_conv);
+		if (flag_buffer->star == 1)
+			ft_flag_spacing(va_arg(ap, int), ' ');
+		else if (flag_buffer->star == 0)
+			ft_flag_spacing(count, ' ');
+	}
+	else if (flag_buffer->mark == 1)
+	{
+		if (flag_buffer->star > 0)
+			ft_flag_spacing_arg(flag_buffer, ap);
+		else if (flag_buffer->star < 0)
+			flags_spacing_
+	}
+
 }
