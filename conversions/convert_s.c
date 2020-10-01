@@ -6,18 +6,18 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 14:25:25 by user42            #+#    #+#             */
-/*   Updated: 2020/08/07 02:18:03 by asimon           ###   ########.fr       */
+/*   Updated: 2020/10/01 15:24:49 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-size_t		ft_convert_s(char *str)
+t_flag		*ft_convert_s(char *str, const t_flag *flag_buffer)
 {
-	size_t		ret;
+	t_flag		*ret;
 
-	ret = ft_strlen(str);
-	ft_putstr(str);
-
+	ret = (t_flag *)flag_buffer;
+	ret->ret_conv = str;
+	ret->count_conv = ft_strlen(str);
 	return (ret);
 }

@@ -6,13 +6,13 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:23:04 by user42            #+#    #+#             */
-/*   Updated: 2020/08/07 02:16:39 by asimon           ###   ########.fr       */
+/*   Updated: 2020/10/01 15:30:03 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-size_t		ft_count_nb(unsigned int nb)
+static size_t		ft_count_nb(unsigned int nb)
 {
 	unsigned int	ret;
 
@@ -25,7 +25,7 @@ size_t		ft_count_nb(unsigned int nb)
 	return (ret);
 }
 
-char		*ft_new(size_t len)
+static char		*ft_new(size_t len)
 {
 	char	*ret;
 
@@ -36,7 +36,7 @@ char		*ft_new(size_t len)
 	return (ret);
 }
 
-char		*ft_itoa2(unsigned int nb)
+static char		*ft_itoa2(unsigned int nb)
 {
 	int				neg;
 	char			*ret;
@@ -63,15 +63,14 @@ char		*ft_itoa2(unsigned int nb)
 	return (ret);
 }
 
-size_t		ft_convert_u(unsigned int nb)
+t_flag		*ft_converat_u(unsigned int nb, const t_flag *flag_buffer)
 {
 	char		*buff;
-	size_t		ret;
-	
-	buff = ft_itoa2(nb);
-	ret = ft_strlen(buff);
-	ft_putstr(buff);
+	t_flag		*ret;
 
+	ret = (t_flag *)flag_buffer;
+	ret->ret_conv = ft_itoa2(nb);
+	ret->count_conv = ft_strlen(buff);
 	return (ret);
 }
 

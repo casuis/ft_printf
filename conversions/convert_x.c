@@ -6,19 +6,20 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/20 11:41:05 by user42            #+#    #+#             */
-/*   Updated: 2020/08/07 02:12:48 by asimon           ###   ########.fr       */
+/*   Updated: 2020/10/01 15:36:36 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-size_t		ft_convert_x(int ptr)
+t_flag		*ft_convert_x(int ptr, const t_flag *flag_buffer)
 {
 	char		*base;
 	char		*buff;
 	int			i;
-	size_t		ret;
+	t_flag		*ret;
 
+	ret = (t_flag *)flag_buffer;
 	i = ft_count(ptr, 16);
 	buff = ft_create(i + 1);
 	base = "0123456789abcdef";
@@ -29,7 +30,8 @@ size_t		ft_convert_x(int ptr)
 		i--;
 	}
 	buff[i] = base[ptr % 16];
-	ft_putstr(buff);
+	ret->ret_conv = buff;
+	ret->count_conv = ft_strlen(buff);
 	free(buff);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 01:46:14 by user42            #+#    #+#             */
-/*   Updated: 2020/08/07 03:47:23 by asimon           ###   ########.fr       */
+/*   Updated: 2020/10/01 16:14:20 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ static char		*ft_parse(char *str)
 		return ("0123456789");
 }
 
-size_t			ft_convert_octal(char *str, char *base)
+static t_flag		*ft_conv_o(char *str, char *base, const t_flag *flag_buffer)
 {
 	int		tmp;
 	int		i;
+	t_flag		*ret;
 
 	tmp = 0;
+	ret = (t_flag *)flag_buffer;
 	i = ft_strlen(str) - 1;
 	while (i > 0)
 	{
@@ -36,16 +38,19 @@ size_t			ft_convert_octal(char *str, char *base)
 		str++;
 	}
 	tmp += *str - 48;
-	ft_putstr(ft_itoa(tmp));
-	return (ft_strlen(ft_itoa(tmp)));
+	ret->ret_conv = ft_itoa(tmp);
+	ret->count_conv = ft_strlen(ft_itoa(tmp));
+	return (ret);
 }
 
-size_t			ft_convert_hexa(char *base, char *str)
+static t_flag		*ft_conv_h(char *base, char *str, const t_flag *flag_buffer)
 {
 	int	i;
 	int	tmp;
 	int	y;
+	t_flag		*ret;
 
+	ret = (t_flag *)flag_buffer;
 	i = 0;
 	y = ft_strlen(str) - 1;
 	tmp = 0;
@@ -62,35 +67,46 @@ size_t			ft_convert_hexa(char *base, char *str)
 	while (*str != base[i])
 		i++;
 	tmp += i;
-	ft_putstr(ft_itoa(tmp));
-	return (ft_strlen(ft_itoa(tmp)));
+	ret->count_conv = ft_strlen(ft_itoa(tmp));
+	ret->ret_conv = ft_itoa(tmp);
+	return (ret);
 }
 
-size_t			ft_convert_i(char *str)
+static char			*ft_mouv(char *str, const t_flag *flag_buffer)
 {
-	char	*base;
-	int		nb;
-	int		i;
+	t_flag		*buff;
 
-	i = 0;
+	buff = (t_flag *)flag_buffer;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
-			ft_putchar('-');
+			buff->is_a_minus = 1;
 		str++;
 		if ((*str == '+' || *str == '-') && *str != *(str - 1))
 			str++;
 	}
-	base = ft_parse(str);
+	return (str);
+}
+
+t_flag			*ft_convert_i(char *str, const t_flag *flag_buffer)
+{
+	t_flag		*ret;
+	int			nb;
+	int			i;
+
+	i = 0;
+	ret = (t_flag*)flag_buffer;
+	str = ft_mouv(str, ret);
 	if (*str == '0' && *(str + 1))
 		str++;
 	if (*str == 'x' || *str == 'X')
 		str++;
-	if (ft_strlen(base) == 8)
-		return (ft_convert_octal(str, base));
-	else if (ft_strlen(base) == 16)
-		return (ft_convert_hexa(base, str));
-	else if (ft_strlen(base) == 10)
-		ft_putstr(str);
-	return (ft_strlen(str));
+	if (ft_strlen(ft_parse(str)) == 8)
+		return (ft_convert_octal(str, ft_parse(str), ret));
+	else if (ft_strlen(ft_parse(str)) == 16)
+		return (ft_convert_hexa(ft_parse(str), str, ret));
+	else if (ft_strlen(ft_parse(str)) == 10)
+		ret->ret_conv = str;
+	ret->count_conv = ft_strlen(str);
+	return (ret);
 }

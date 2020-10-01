@@ -6,16 +6,16 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 18:26:52 by user42            #+#    #+#             */
-/*   Updated: 2020/08/07 02:18:45 by asimon           ###   ########.fr       */
+/*   Updated: 2020/09/29 09:53:02 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-size_t		ft_convert_p(void *p)
+t_flag		*ft_convert_p(void *p, t_flag *flag_buffer)
 {
 	unsigned long	adr;
-	char const		*base;
+	char			*base;
 	char			res[9];
 	int				i;
 
@@ -29,8 +29,6 @@ size_t		ft_convert_p(void *p)
 		i--;
 	}
 	res[i] = base[(adr % 16)];
-	ft_putstr("0x");
-	while (i < 9)
-		ft_putchar(res[i++]);
-	return (8);
+	flag_buffer->ret_conv = res;
+	return (flag_buffer);
 }
