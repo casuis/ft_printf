@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:37:00 by asimon            #+#    #+#             */
-/*   Updated: 2020/09/24 14:50:18 by asimon           ###   ########.fr       */
+/*   Updated: 2020/09/28 10:10:35 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ int			ft_core_conv(t_struct *buff, char *str, va_list ap)
 	int			i;
 
 	i = -1;
-	flag_buffer = buff -> flag_info;
+	flag_buffer = buff->flag_info;
 	flag_buffer = ft_parse_core(str, buff, ap);
 	while (str[++i] != ' ' && str[i])
 		if (ft_send_conv(str[i]) != 0 && ft_send_conv(str[i]) != -1)
-			flag_buffer -> conv = ft_send_conv(str[i]);
-	if (flag_buffer -> conv != 0)
+			flag_buffer->conv = ft_send_conv(str[i]);
+	if (flag_buffer->conv != 0)
 		return (1);
 	return (0);
 }
@@ -64,7 +64,7 @@ void		ft_read_casu(char *str, t_struct *buff, va_list ap)
 			i += 2;
 		}
 		else if (ft_core_conv(buff, &str[i + 1], ap) == 1 && str[i] == '%')
-			ft_parse_str_core(str, buff, ap);
+			ft_parse_str_core(&str[i], buff, ap);
 		else
 			ft_putchar(str[i]);
 	}
