@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 19:07:44 by user42            #+#    #+#             */
-/*   Updated: 2020/09/24 13:36:15 by asimon           ###   ########.fr       */
+/*   Updated: 2020/10/01 15:46:37 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ typedef struct		s_flag
 	int		min_size;
 	int		max_size;
 	int		count;
+	int		count_conv;
+	int		is_a_minus;
+	char	*ret_conv;
 }					t_flag;
 
 typedef struct		s_struct
 {
 	t_flag	*flag_info;
-	char	*ret;
 	int		last_one;
 }					t_struct;
 
@@ -46,14 +48,14 @@ char		*ft_lower_case(char *str);
 char		*ft_upper_case(char *str);
 int		ft_atoi(char *str);
 char		*ft_itoa(int nb);
-size_t		ft_convert_c(char c);
-size_t		ft_convert_d(int nb);
-size_t		ft_convert_i(char *str);
-size_t		ft_convert_p(void *p);
-size_t		ft_convert_s(char *str);
-size_t		ft_convert_u(unsigned int nb);
-size_t		ft_convert_x(int ptr);
-size_t		ft_convert_xx(int ptr);
+t_flag		*ft_convert_c(char c, const t_flag *flag_buffer);
+t_flag		*ft_convert_d(int nb, const t_flag *flag_buffer);
+t_flag		*ft_convert_i(char *str, const t_flag *flag_buffer);
+t_flag		*ft_convert_p(void *p, t_flag *flag_buffer);
+t_flag		*ft_convert_s(char *str, const t_flag *flag_buffer);
+t_flag		*ft_convert_u(unsigned int nb, const t_flag *flag_buffer);
+t_flag		*ft_convert_x(int ptr, const t_flag *flag_buffer);
+t_flag		*ft_convert_xx(int ptr, const t_flag *flag_buffer);
 char		*ft_create_table();
 void		ft_check_flag(char *str, va_list ap);
 int		ft_parse_convert(char *c, va_list ap);
