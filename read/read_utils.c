@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:37:00 by asimon            #+#    #+#             */
-/*   Updated: 2020/09/28 10:10:35 by asimon           ###   ########.fr       */
+/*   Updated: 2020/10/16 07:33:16 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,39 @@ char		ft_send_conv(char c)
 	return (-1);
 }
 
-int			ft_core_conv(t_struct *buff, char *str, va_list ap)
+t_flag		*ft_srch_conv(t_flag *buff, char *str, va_list ap)
 {
 	t_flag		*flag_buffer;
 	int			i;
 
 	i = -1;
-	flag_buffer = buff->flag_info;
-	flag_buffer = ft_parse_core(str, buff, ap);
+	flag_buffer = (t_flag *)buff;
+	flag_buffer = ft_parse_flag_core(str, flag_buffer, ap);
 	while (str[++i] != ' ' && str[i])
 		if (ft_send_conv(str[i]) != 0 && ft_send_conv(str[i]) != -1)
 			flag_buffer->conv = ft_send_conv(str[i]);
-	if (flag_buffer->conv != 0)
-		return (1);
-	return (0);
+	return (flag_buffer);
 }
 
-void		ft_read_casu(char *str, t_struct *buff, va_list ap)
+static char		*ft_protect_str(const char *str)
+{
+	int		i;
+	char	*ret;
+
+	i = 0;
+	ret = (char *)str;
+	while (ret[i])
+		i++;
+	ret[i] = '\0';
+	return (ret);
+}
+
+void		ft_read_casu(char *str, t_flag *flag_buffer, va_list ap)
 {
 	int		i;
 
 	i = 0;
+	str = ft_protect_str(str);
 	while (str[i])
 	{
 		if (str[i] == '%' && str[i + 1] == '%')
@@ -63,34 +75,37 @@ void		ft_read_casu(char *str, t_struct *buff, va_list ap)
 			ft_putchar('%');
 			i += 2;
 		}
-		else if (ft_core_conv(buff, &str[i + 1], ap) == 1 && str[i] == '%')
-			ft_parse_str_core(&str[i], buff, ap);
-		else
+		else if (str[i] == '%')
+		{
+			flag_buffer = ft_srch_conv(flag_buffer, &str[i + 1], ap);
+			if (flag_buffer->conv != ' ')
+			{
+				flag_buffer = ft_parse_conv(flag_buffer, ap);
+				str = ft_flag_position(&str[i], flag_buffer, ap);
+			}
+		}
+		else if (str[i] != '%' && str[i] != '\0')
 			ft_putchar(str[i]);
+		i++;
 	}
 }
 
-void			ft_test(char *str, ...)
+void		fct_test(char *str, ...)
 {
 	va_list		ap;
-	t_struct		*buff;
-	t_flag			*flag_buffer;
-	int				ret;
+	t_flag		*flag_buffer;
 
-	if (!(buff = malloc(sizeof(t_struct) * 1)))
-		return ;
-	if (!(buff -> flag_info = malloc(sizeof(t_flag) * 1)))
-		return ;
 	va_start(ap, str);
-	ret = ft_core_conv(buff, str, ap);
-	flag_buffer = buff -> flag_info;
-	printf("conv : %c\ncount: %d\nmin_size: %d\nmax_size: %d\nzero: %d\nret: %d\n", flag_buffer -> conv, flag_buffer -> count, flag_buffer -> min_size, flag_buffer -> max_size, flag_buffer -> zero, ret);
+	flag_buffer = ft_create_flag_buffer(flag_buffer);
+	ft_read_casu(str, flag_buffer, ap);
 	va_end(ap);
-	free(buff);
 	free(flag_buffer);
 }
+
 int			main(int argc, char **argv)
 {
-	ft_test(argv[1], atoi(argv[2]), atoi(argv[3]));
+	fct_test(argv[1], atoi(argv[2]), atoi(argv[3]), 044);
+	ft_putstr("\n");
+	printf(argv[1], atoi(argv[2]), atoi(argv[3]), 044);
 	return (0);
 }
