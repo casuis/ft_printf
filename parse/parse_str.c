@@ -6,18 +6,12 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 13:13:36 by asimon            #+#    #+#             */
-/*   Updated: 2020/10/16 06:31:56 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/02 17:02:50 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
-/*
-void		*ft_parse_str_core(char *str, const t_struct *buff, va_list ap)
-{
-	int		i;
 
-}
-*/
 t_flag		*ft_parse_conv(t_flag *flag_buff, va_list ap)
 {
 	t_flag		*flag_buffer;
@@ -35,17 +29,9 @@ t_flag		*ft_parse_conv(t_flag *flag_buff, va_list ap)
 		flag_buffer = ft_convert_s(va_arg(ap, char*), flag_buffer);
 	else if (flag_buffer->conv == 'u')
 		flag_buffer = ft_convert_u(va_arg(ap, unsigned int), flag_buffer);
-	else if (flag_buffer -> conv == 'x')
+	else if (flag_buffer->conv == 'x')
 		flag_buffer = ft_convert_x(va_arg(ap, int), flag_buffer);
 	else if (flag_buffer->conv == 'X')
 		flag_buffer = ft_convert_xx(va_arg(ap, int), flag_buffer);
 	return (flag_buffer);
 }
-/*
-void		ft_apply_flag(char *str, const t_struct *buff, va_list ap)
-{
-	t_flag		*flag_buffer;
-
-	flag_buffer = (t_flag *)buff->flag_info;
-	ft_flag_position(char *str, flag_buffer);
-}*/

@@ -1,11 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   parse_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/05 14:46:19 by asimon            #+#    #+#             */
-/*   Updated: 2020/10/16 05:13:36 by asimon           ###   ########.fr       */
+/*   Created: 2020/11/02 16:59:11 by asimon            #+#    #+#             */
+/*   Updated: 2020/11/02 17:01:55 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +37,7 @@ t_flag			*ft_parse_flag_buffer(t_flag *flag_buffer, char *str)
 	return (ret);
 }
 
-t_flag		*ft_parse_mark_minus(char *str, t_flag *flag_buffer)
+t_flag			*ft_parse_mark_minus(char *str, t_flag *flag_buffer)
 {
 	int			i;
 	int			nb;
@@ -66,7 +67,7 @@ t_flag		*ft_parse_mark_minus(char *str, t_flag *flag_buffer)
 
 t_flag			*ft_parse_star(char *str, t_flag *flag_buffer, va_list ap)
 {
-	int		i;
+	int			i;
 
 	i = -1;
 	if (flag_buffer->star == 2 && flag_buffer->mark == 1)
@@ -88,7 +89,6 @@ t_flag			*ft_parse_star(char *str, t_flag *flag_buffer, va_list ap)
 	return (flag_buffer);
 }
 
-
 t_flag			*ft_parse_utils(t_flag *flag_buffer)
 {
 	if (flag_buffer->mark == 1 && flag_buffer->min_size < 0)
@@ -96,7 +96,8 @@ t_flag			*ft_parse_utils(t_flag *flag_buffer)
 		flag_buffer->minus = 1;
 		flag_buffer->min_size = -flag_buffer->min_size;
 	}
-	if (flag_buffer->mark == 1 && flag_buffer->max_size < 0 && flag_buffer->star < 2)
+	if (flag_buffer->mark == 1 &&
+	flag_buffer->max_size < 0 && flag_buffer->star < 2)
 	{
 		flag_buffer->minus = 1;
 		flag_buffer->min_size = -flag_buffer->max_size;

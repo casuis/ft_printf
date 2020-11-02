@@ -6,13 +6,13 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 01:46:14 by user42            #+#    #+#             */
-/*   Updated: 2020/10/01 16:14:20 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/02 16:35:23 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-static char		*ft_parse(char *str)
+static char			*ft_parse(char *str)
 {
 	if (str[0] == '0' && str[1] != 'x')
 		return ("01234567");
@@ -22,10 +22,10 @@ static char		*ft_parse(char *str)
 		return ("0123456789");
 }
 
-static t_flag		*ft_conv_o(char *str, char *base, const t_flag *flag_buffer)
+static t_flag		*ft_conv_o(char *str, char *base, t_flag *flag_buffer)
 {
-	int		tmp;
-	int		i;
+	int			tmp;
+	int			i;
 	t_flag		*ret;
 
 	tmp = 0;
@@ -43,11 +43,11 @@ static t_flag		*ft_conv_o(char *str, char *base, const t_flag *flag_buffer)
 	return (ret);
 }
 
-static t_flag		*ft_conv_h(char *base, char *str, const t_flag *flag_buffer)
+static t_flag		*ft_conv_h(char *base, char *str, t_flag *flag_buffer)
 {
-	int	i;
-	int	tmp;
-	int	y;
+	int			i;
+	int			tmp;
+	int			y;
 	t_flag		*ret;
 
 	ret = (t_flag *)flag_buffer;
@@ -72,7 +72,7 @@ static t_flag		*ft_conv_h(char *base, char *str, const t_flag *flag_buffer)
 	return (ret);
 }
 
-static char			*ft_mouv(char *str, const t_flag *flag_buffer)
+static char			*ft_mouv(char *str, t_flag *flag_buffer)
 {
 	t_flag		*buff;
 
@@ -80,33 +80,35 @@ static char			*ft_mouv(char *str, const t_flag *flag_buffer)
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
-			buff->is_a_minus = 1;
+			flag_buffer->is_a_minus = 1;
 		str++;
-		if ((*str == '+' || *str == '-') && *str != *(str - 1))
+		if (*str == '+' && *str != *(str - 1))
 			str++;
 	}
 	return (str);
 }
 
-t_flag			*ft_convert_i(char *str, const t_flag *flag_buffer)
+t_flag				*ft_convert_i(int str, t_flag *flag_buffer)
 {
 	t_flag		*ret;
 	int			nb;
 	int			i;
+	char		*tmp;
 
 	i = 0;
 	ret = (t_flag*)flag_buffer;
-	str = ft_mouv(str, ret);
-	if (*str == '0' && *(str + 1))
-		str++;
-	if (*str == 'x' || *str == 'X')
-		str++;
-	if (ft_strlen(ft_parse(str)) == 8)
-		return (ft_convert_octal(str, ft_parse(str), ret));
-	else if (ft_strlen(ft_parse(str)) == 16)
-		return (ft_convert_hexa(ft_parse(str), str, ret));
-	else if (ft_strlen(ft_parse(str)) == 10)
-		ret->ret_conv = str;
-	ret->count_conv = ft_strlen(str);
+	tmp = ft_itoa(str);
+	tmp = ft_mouv(tmp, ret);
+	if (*tmp == '0' && *(tmp + 1))
+		tmp++;
+	if (*tmp == 'x' || *tmp == 'X')
+		tmp++;
+	if (ft_strlen(ft_parse(tmp)) == 8)
+		return (ft_conv_o(tmp, ft_parse(tmp), ret));
+	else if (ft_strlen(ft_parse(tmp)) == 16)
+		return (ft_conv_h(ft_parse(tmp), tmp, ret));
+	else if (ft_strlen(ft_parse(tmp)) == 10)
+		ret->ret_conv = tmp;
+	ret->count_conv = ft_strlen(tmp);
 	return (ret);
 }

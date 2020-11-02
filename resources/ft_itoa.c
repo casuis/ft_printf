@@ -6,15 +6,15 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 20:53:26 by user42            #+#    #+#             */
-/*   Updated: 2020/06/27 19:16:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/02 16:57:27 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-static size_t			ft_count_nb(int nb)
+static size_t		ft_count_nb(int nb)
 {
-	int	ret;
+	int		ret;
 
 	ret = 1;
 	while (nb >= 10)
@@ -25,7 +25,7 @@ static size_t			ft_count_nb(int nb)
 	return (ret);
 }
 
-char			*ft_itoa(int nb)
+char				*ft_itoa(int nb)
 {
 	int		i;
 	int		neg;

@@ -6,10 +6,9 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 19:07:44 by user42            #+#    #+#             */
-/*   Updated: 2020/10/01 15:46:37 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/02 17:14:11 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef PRINTF_H
 # define PRINTF_H
 # include <stdio.h>
@@ -40,7 +39,7 @@ typedef struct		s_struct
 
 void		ft_putchar(char c);
 void		ft_putstr(char *str);
-size_t		ft_count(int nb, int base);
+size_t		ft_count(unsigned int nb, int base);
 size_t		ft_strlen(char *str);
 char		*ft_create(int len);
 int		ft_power(int nb, int power);
@@ -48,29 +47,38 @@ char		*ft_lower_case(char *str);
 char		*ft_upper_case(char *str);
 int		ft_atoi(char *str);
 char		*ft_itoa(int nb);
-t_flag		*ft_convert_c(char c, const t_flag *flag_buffer);
-t_flag		*ft_convert_d(int nb, const t_flag *flag_buffer);
-t_flag		*ft_convert_i(char *str, const t_flag *flag_buffer);
+t_flag		*ft_convert_c(char c, t_flag *flag_buffer);
+t_flag		*ft_convert_d(int nb, t_flag *flag_buffer);
+t_flag		*ft_convert_i(int str, t_flag *flag_buffer);
 t_flag		*ft_convert_p(void *p, t_flag *flag_buffer);
-t_flag		*ft_convert_s(char *str, const t_flag *flag_buffer);
-t_flag		*ft_convert_u(unsigned int nb, const t_flag *flag_buffer);
-t_flag		*ft_convert_x(int ptr, const t_flag *flag_buffer);
-t_flag		*ft_convert_xx(int ptr, const t_flag *flag_buffer);
+t_flag		*ft_convert_s(char *str, t_flag *flag_buffer);
+t_flag		*ft_convert_u(unsigned int nb, t_flag *flag_buffer);
+t_flag		*ft_convert_x(unsigned int ptr, t_flag *flag_buffer);
+t_flag		*ft_convert_xx(int ptr, t_flag *flag_buffer);
+t_flag		*ft_srch_conv(t_flag *buff, char *str, va_list ap);
 char		*ft_create_table();
 void		ft_check_flag(char *str, va_list ap);
 int		ft_parse_convert(char *c, va_list ap);
-void		ft_flag_spacing(char *str, int count, char c);
-void		ft_flag_spacing_arg(const t_flag *flag_buffer);
-void		ft_flag_position(const t_flag *flag_buffer, char *str);
-void		ft_parse_flag(t_struct *buff);
+t_flag		*ft_parse_conv(t_flag *flag_buff, va_list ap);
+t_flag		*ft_parse_flag_core(char *str, t_flag *buffer, va_list ap);
+void		ft_flag_spacing(int count, char c);
+void		ft_flag_spacing_mark(t_flag *flag_buffer, int min, int max);
+char		*ft_flag_position(char *str, t_flag *flag_buffer, va_list ap);
+void		ft_flag_minus(t_flag *flag_buffer, va_list ap);
+void		ft_flag_mark(t_flag *flag_buffer, va_list ap);
+void		ft_flag_star(t_flag *flag_buffer, va_list ap);
+void		ft_flag_count_z(t_flag *flag_buffer, char c, va_list ap);
 t_flag		*ft_parse_flag_buffer(t_flag *flag_buffer, char *str);
 char		ft_send_conv(char c);
 char		ft_find_conv(char *str, t_struct *buffer);
-int			ft_print_casu(char *str, t_struct *buffer);
+int		ft_print_casu(char *str, t_struct *buffer);
 t_struct		*ft_init(int count_arg);
 t_flag		*ft_parse_mark_minus(char *str, t_flag *flag_buffer);
 t_flag		*ft_parse_flag_buffer(t_flag *flag_buffer, char *str);
-t_flag		*ft_recup_min_max(char *str, const t_flag *flag_buffer);
-t_flag		*ft_parse_core(char *str, t_struct *buffer, va_list ap);
+t_flag		*ft_recup_min_max(char *str, t_flag *flag_buffer);
+void		ft_read_casu(char *str, t_flag *buffer, va_list ap);
+t_flag			*ft_create_flag_buffer(t_flag *flag_buffer);
+void			ft_mark(t_flag *flag_buffer);
+void			ft_core(char *str, ...);
 
 #endif

@@ -6,16 +6,16 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 14:18:24 by user42            #+#    #+#             */
-/*   Updated: 2020/09/28 10:48:32 by asimon           ###   ########.fr       */
+/*   Updated: 2020/10/15 22:47:14 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-t_flag		*ft_convert_c(char c, const t_flag *flag_buffer)
+t_flag		*ft_convert_c(char c, t_flag *flag_buffer)
 {
 	t_flag		*ret;
-	char		*buff;
+	char		buff[2];
 
 	buff[0] = c;
 	buff[1] = '\0';

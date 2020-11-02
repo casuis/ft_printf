@@ -6,13 +6,13 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 17:11:54 by user42            #+#    #+#             */
-/*   Updated: 2020/10/01 15:40:07 by asimon           ###   ########.fr       */
+/*   Updated: 2020/10/14 03:43:07 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printf.h"
 
-t_flag		*ft_convert_xx(int ptr, const t_flag *flag_buffer)
+t_flag		*ft_convert_xx(int ptr, t_flag *flag_buffer)
 {
 	char		*base;
 	char		*buff;
