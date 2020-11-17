@@ -6,11 +6,11 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 21:04:10 by user42            #+#    #+#             */
-/*   Updated: 2020/11/02 16:48:40 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/03 14:38:14 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf.h"
+#include "../includes/printf.h"
 
 size_t		ft_count(unsigned int nb, int base)
 {

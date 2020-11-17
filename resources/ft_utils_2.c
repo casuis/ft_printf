@@ -6,11 +6,11 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 14:15:34 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/02 16:56:36 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/17 00:20:06 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf.h"
+#include "../includes/printf.h"
 
 char			*ft_create_table(void)
 {
@@ -48,7 +48,7 @@ t_flag			*ft_recup_min_max(char *str, t_flag *flag_buffer)
 	return (ret);
 }
 
-void			ft_flag_spacing(int count, char c)
+size_t			ft_flag_spacing(int count, char c)
 {
 	int			i;
 
@@ -56,4 +56,5 @@ void			ft_flag_spacing(int count, char c)
 	if (count > 0)
 		while (i++ < count)
 			ft_putchar(c);
+	return (i - 1);
 }

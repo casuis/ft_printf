@@ -6,11 +6,11 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:43:00 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/02 16:46:09 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/07 16:15:24 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf.h"
+#include "../includes/printf.h"
 
 char		*ft_create(int len)
 {
@@ -22,6 +22,26 @@ char		*ft_create(int len)
 		return (NULL);
 	while (i < len + 1)
 		ret[i++] = '\0';
+	return (ret);
+}
+
+char		*ft_protect_str(const char *str)
+{
+	int			i;
+	char		*ret;
+
+	i = 0;
+	ret = (char *)str;
+	while (ret[i])
+		i++;
+	if (!(ret = malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	ret[i--] = '\0';
+	while (i >= 0)
+	{
+		ret[i] = str[i];
+		i--;
+	}
 	return (ret);
 }
 

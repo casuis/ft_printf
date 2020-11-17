@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   convert_s.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/18 18:27:50 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/16 21:55:13 by asimon           ###   ########.fr       */
+/*   Created: 2020/06/16 14:25:25 by user42            #+#    #+#             */
+/*   Updated: 2020/11/03 14:36:19 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-t_flag			*ft_create_flag_buffer(void)
+t_flag		*ft_convert_s(char *str, t_flag *flag_buffer)
 {
 	t_flag		*ret;
 
-	if (!(ret = malloc(sizeof(t_flag) * 1)))
-		return (NULL);
-	ret->minus = 0;
-	ret->mark = 0;
-	ret->star = 0;
-	ret->zero = 0;
-	ret->min_size = 0;
-	ret->max_size = 0;
-	ret->conv = ' ';
-	ret->count = 0;
-	ret->ret_count = 0;
-	ret->ret_conv = "";
+	ret = (t_flag *)flag_buffer;
+	ret->ret_conv = str;
+	ret->count_conv = ft_strlen(str);
 	return (ret);
 }

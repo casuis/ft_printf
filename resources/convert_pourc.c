@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   convert_pourc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/18 18:27:50 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/16 21:55:13 by asimon           ###   ########.fr       */
+/*   Created: 2020/11/16 22:44:37 by asimon            #+#    #+#             */
+/*   Updated: 2020/11/17 01:27:00 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-t_flag			*ft_create_flag_buffer(void)
+t_flag		*ft_convert_pourc(t_flag *flag_buffer)
 {
 	t_flag		*ret;
 
-	if (!(ret = malloc(sizeof(t_flag) * 1)))
-		return (NULL);
-	ret->minus = 0;
-	ret->mark = 0;
-	ret->star = 0;
-	ret->zero = 0;
-	ret->min_size = 0;
-	ret->max_size = 0;
-	ret->conv = ' ';
-	ret->count = 0;
-	ret->ret_count = 0;
-	ret->ret_conv = "";
+	ret = flag_buffer;
+	ret->ret_conv = "%";
+	ret->count_conv = 1;
 	return (ret);
 }
