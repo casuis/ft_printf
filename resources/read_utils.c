@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:37:00 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/17 02:51:10 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/17 19:59:35 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_flag			*ft_sconv(char *str, va_list ap)
 		if (ft_send_conv(str[i]) != 0 && ft_send_conv(str[i]) != -1)
 			flag_buffer->conv = ft_send_conv(str[i]);
 	if (flag_buffer->conv != ' ')
-		flag_buffer = ft_parse_flag_core(str, flag_buffer, ap);
+		return (ft_parse_flag_core(str, flag_buffer, ap));
 	return (flag_buffer);
 }
 
@@ -74,10 +74,4 @@ size_t			ft_printf(char *str, ...)
 	ret = ft_read_casu(str, ap);
 	va_end(ap);
 	return (ret);
-}
-
-int			main(int argc, char **argv)
-{
-	printf("%zu\n", ft_printf(argv[1], argv[2], argv[3]));
-	printf(argv[1], argv[2], argv[3]);
 }

@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:41:05 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/17 01:29:00 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/17 19:34:33 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 size_t		ft_putchar(char c)
 {
-	write(1, &c, 1);
-	return (1);
+	if (c)
+	{
+		write(1, &c, 1);
+		return (1);
+	}
+	return (0);
 }
 
 size_t		ft_putstr(char *str)

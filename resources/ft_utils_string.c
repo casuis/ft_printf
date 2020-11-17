@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:43:00 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/07 16:15:24 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/17 19:20:44 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ size_t		ft_strlen(char *str)
 	int		i;
 
 	i = 0;
-	while (str[i])
-		i++;
+	if (str != NULL)
+		while (str[i])
+			i++;
 	return (i);
 }

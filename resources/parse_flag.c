@@ -18,7 +18,7 @@ t_flag			*ft_parse_flag_buffer(t_flag *flag_buffer, char *str)
 
 	i = 0;
 	ret = flag_buffer;
-	while (str[i] && str[i] != ' ')
+	while (str[i] && str[i] != ' ' && str[i] != '%')
 	{
 		if (str[i] == '.' && (str[i + 1] != ' ' && str[i + 1] != '\0'))
 			ret->mark = 1;
@@ -31,6 +31,8 @@ t_flag			*ft_parse_flag_buffer(t_flag *flag_buffer, char *str)
 			ret->star += 1;
 		i++;
 	}
+	if (ret->mark == 0 && ret->zero == 0 && ret->star == 0 && ret->minus == 0)
+		ret->count = ft_atoi(str);
 	return (ret);
 }
 
