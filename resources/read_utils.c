@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:37:00 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/17 19:59:35 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/18 02:52:06 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,12 @@ size_t			ft_printf(char *str, ...)
 	ret = ft_read_casu(str, ap);
 	va_end(ap);
 	return (ret);
+}
+
+int main(int argc, const char *argv[])
+{
+	ft_printf((char *)argv[1], atoi(argv[2]));
+	printf("\n");
+	printf(argv[1], atoi(argv[2]));
+	return 0;
 }

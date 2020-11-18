@@ -33,6 +33,8 @@ t_flag			*ft_parse_flag_buffer(t_flag *flag_buffer, char *str)
 	}
 	if (ret->mark == 0 && ret->zero == 0 && ret->star == 0 && ret->minus == 0)
 		ret->count = ft_atoi(str);
+	if (ret->minus == 1)
+		ret->zero = 0;
 	return (ret);
 }
 

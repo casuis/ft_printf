@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 01:46:14 by user42            #+#    #+#             */
-/*   Updated: 2020/11/03 14:36:00 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/18 01:59:09 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ t_flag				*ft_convert_i(int str, t_flag *flag_buffer)
 		return (ft_conv_h(ft_parse(tmp), tmp, ret));
 	else if (ft_strlen(ft_parse(tmp)) == 10)
 		ret->ret_conv = tmp;
-	ret->count_conv = ft_strlen(tmp);
+	if (ret->is_a_minus == 1)
+		ret->ret_conv = ft_itoa(-(ft_atoi(ret->ret_conv)));
+	ret->count_conv = ft_strlen(ret->ret_conv);
 	return (ret);
 }

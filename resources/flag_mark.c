@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 09:51:24 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/17 02:42:10 by asimon           ###   ########.fr       */
+/*   Updated: 2020/11/18 03:17:07 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,17 @@ static char			*ft_app_fil_blank(t_flag *flag_buffer, char *ret)
 	i = 0;
 	y = 0;
 	if (flag_buffer->is_a_minus == 1)
+	{
 		ret[i++] = '-';
-	while (flag_buffer->ret_conv[y] && i < flag_buffer->max_size)
+		flag_buffer->ret_conv = &(flag_buffer->ret_conv[1]);
+		flag_buffer->count_conv -= 1;
+		flag_buffer->max_size += 1;
+	}
+	if (flag_buffer->conv == 'i')
+		while (i < (flag_buffer->max_size - flag_buffer->count_conv))
+			ret[i++] = '0';
+	while ((flag_buffer->conv == 'i' && flag_buffer->ret_conv[y]) ||
+	(i < flag_buffer->max_size && flag_buffer->ret_conv[y]))
 	{
 		ret[i++] = flag_buffer->ret_conv[y];
 		y++;
@@ -33,7 +42,8 @@ static char			*ft_app_fil_blank(t_flag *flag_buffer, char *ret)
 static size_t			ft_app_mark_minus(t_flag *flag_buffer, int count, char *ret)
 {
 	size_t		ret_count;
-
+	//pb de min size
+	printf("flag_buffer->min_size: %d\n", flag_buffer->min_size);
 	ret_count = 0;
 	if (flag_buffer->minus == 1 && (flag_buffer->min_size > 0
 	|| flag_buffer->max_size > 0))
