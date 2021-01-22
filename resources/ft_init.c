@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:27:50 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/18 02:48:59 by asimon           ###   ########.fr       */
+/*   Updated: 2020/12/22 13:26:58 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_flag			*ft_create_flag_buffer(void)
 
 	if (!(ret = malloc(sizeof(t_flag) * 1)))
 		return (NULL);
+	ret->prefix = "";
 	ret->minus = 0;
 	ret->mark = 0;
 	ret->star = 0;
@@ -27,7 +28,7 @@ t_flag			*ft_create_flag_buffer(void)
 	ret->conv = ' ';
 	ret->count = 0;
 	ret->ret_count = 0;
-	ret->ret_conv = "";
+	ret->ret_conv = (unsigned char *)"";
 	ret->is_a_minus = 0;
 	return (ret);
 }

@@ -6,28 +6,27 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:41:05 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/17 19:34:33 by asimon           ###   ########.fr       */
+/*   Updated: 2020/12/23 16:52:28 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-size_t		ft_putchar(char c)
+size_t		ft_putchar(unsigned char c)
 {
-	if (c)
-	{
-		write(1, &c, 1);
-		return (1);
-	}
-	return (0);
+	write(1, &c, 1);
+	return (1);
 }
 
-size_t		ft_putstr(char *str)
+size_t		ft_putstr(unsigned char *str)
 {
-	int	i;
+	int		i;
 
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (str[i])
+	{
 		ft_putchar(str[i]);
+		i++;
+	}
 	return (i);
 }

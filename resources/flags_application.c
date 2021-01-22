@@ -6,45 +6,50 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 15:13:02 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/18 02:40:36 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 16:13:15 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-void		ft_flag_minus(t_flag *flag_buffer)
+t_flag		*ft_flag_minus(t_flag *flag_buffer)
 {
 	int			count;
 	t_flag		*buffer;
 
 	buffer = (t_flag *)flag_buffer;
-	count = (flag_buffer->count) - (flag_buffer->count_conv);
-	flag_buffer->ret_count += ft_putstr(flag_buffer->ret_conv);
-	if (flag_buffer->star == 1)
-		flag_buffer->ret_count += ft_flag_spacing(count, ' ');
-	else if (flag_buffer->star == 0 && count > 0)
-		flag_buffer->ret_count += ft_flag_spacing(count, ' ');
+	count = (F_COUNT) - (F_CONV_COUNT + ft_strlen((unsigned char *)F_PRE));
+	if (F_CONV == 'c')
+		F_RET_COUNT += ft_putchar(F_RET_CONV[0]);
+	else
+		F_RET_COUNT += ft_putstr((unsigned char *)F_PRE) + ft_putstr(F_RET_CONV);
+	if (F_STAR == 1)
+		F_RET_COUNT += ft_flag_spacing(count, ' ');
+	else if (F_STAR == 0 && count > 0)
+		F_RET_COUNT += ft_flag_spacing(count, ' ');
+	return (flag_buffer);
 }
 
-void		ft_flag_count_z(t_flag *flag_buffer, char c, va_list ap)
+t_flag				*ft_flag_count_z(t_flag *flag_buffer, unsigned char c)
 {
 	int			count;
 	t_flag		*buffer;
 
 	buffer = (t_flag *)flag_buffer;
-	count = (flag_buffer->count) - (flag_buffer->count_conv);
-	if (flag_buffer->star == 1)
-		flag_buffer->ret_count += ft_flag_spacing(va_arg(ap, int), c);
-	else if (flag_buffer->star == 0 && count > 0)
+	count = F_COUNT - (F_CONV_COUNT + ft_strlen((unsigned char *)F_PRE));
+	if (F_IS_A_MINUS == 1 && F_ZERO == 1)
 	{
-		if (flag_buffer->is_a_minus == 1 && flag_buffer->zero == 1)
-		{
-			flag_buffer->ret_count += ft_putchar('-');
-			flag_buffer->ret_conv = &(flag_buffer->ret_conv[1]);
-		}
-		flag_buffer->ret_count += ft_flag_spacing(count, c);
+			F_RET_COUNT += ft_putchar('-');
+			F_RET_CONV = &(F_RET_CONV[1]);
 	}
-	flag_buffer->ret_count += ft_putstr(flag_buffer->ret_conv);
+	F_RET_COUNT += ft_flag_spacing(count, c);
+	if (F_CONV == 'p')
+		F_RET_COUNT += ft_putstr((unsigned char *)F_PRE);
+	if (F_CONV == 'c')
+		F_RET_COUNT += ft_putchar(F_RET_CONV[0]);
+	else
+		F_RET_COUNT += ft_putstr(F_RET_CONV);
+	return (flag_buffer);
 }
 
 void		ft_flag_star(t_flag *flag_buffer)
@@ -53,7 +58,7 @@ void		ft_flag_star(t_flag *flag_buffer)
 	t_flag		*buffer;
 
 	buffer = (t_flag *)flag_buffer;
-	count = (flag_buffer->count) - (flag_buffer->count_conv);
-	flag_buffer->ret_count += ft_flag_spacing(count, ' ');
-	flag_buffer->ret_count += ft_putstr(flag_buffer->ret_conv);
+	count = (F_COUNT) - (F_CONV_COUNT);
+	F_RET_COUNT += ft_flag_spacing(count, ' ');
+	F_RET_COUNT += (ft_putstr((unsigned char *)F_PRE) + ft_putstr(F_RET_CONV));
 }

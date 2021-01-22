@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 22:44:37 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/17 01:27:00 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/07 14:05:31 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 t_flag		*ft_convert_pourc(t_flag *flag_buffer)
 {
-	t_flag		*ret;
+	unsigned char		pour;
 
-	ret = flag_buffer;
-	ret->ret_conv = "%";
-	ret->count_conv = 1;
-	return (ret);
+	pour = 37;
+	if (!(F_RET_CONV = malloc(sizeof(unsigned char) * 2)))
+		return (NULL);
+	F_RET_CONV[0] = pour;
+	F_RET_CONV[1] = '\0';
+	F_CONV_COUNT = 1;
+	return (flag_buffer);
 }

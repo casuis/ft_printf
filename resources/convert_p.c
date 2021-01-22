@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 18:26:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/03 14:36:09 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 18:09:32 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,45 @@
 static t_flag		*ft_address(char *str, t_flag *flag_buffer)
 {
 	int				i;
-	int				y;
-	char			*ret;
 
-	i = 0;
-	y = 4;
-	if (!(ret = malloc(sizeof(char) * 15)))
+	i = -1;
+	if (!(F_RET_CONV = malloc(sizeof(char) * (ft_strlen((unsigned char *)str)))))
 		return (NULL);
-	ret[0] = '0';
-	ret[1] = 'x';
-	ret[2] = '7';
-	ret[3] = 'f';
-	ret[4] = '8';
-	while (str[i])
-	{
-		ret[y] = str[i];
-		i++;
-		y++;
-	}
-	ret[y] = '\0';
-	flag_buffer->ret_conv = ret;
-	free(ret);
+	if (!(F_PRE = malloc(sizeof(char) * 3)))
+		return (NULL);
+	if (str)
+		F_RET_CONV = (unsigned char *)ft_strcpy(str, (char *)F_RET_CONV);
+	else
+		F_RET_CONV = (unsigned char *)ft_strcpy("0", (char *)F_RET_CONV);
+	F_PRE = ft_strcpy("0x", F_PRE);
+	F_CONV_COUNT = ft_strlen(F_RET_CONV);
+	free(str);
+	str = NULL;
 	return (flag_buffer);
 }
 
 t_flag				*ft_convert_p(void *p, t_flag *flag_buffer)
 {
-	unsigned long	adr;
-	char			*base;
-	char			res[11];
-	int				i;
+	unsigned long long	adr;
+	char				*base;
+	char				*res;
+	int					i;
 
-	adr = (unsigned long)p;
+	adr = (unsigned long long)p;
 	base = "0123456789abcdef";
-	i = 9;
-	while ((adr / 16) > 0 || i >= 9)
+	i = ft_count(adr, 16);
+	if (!(res = malloc(sizeof(char) * i)))
+		return (NULL);
+	res[i] = '\0';
+	if (adr != 0)
 	{
+		while ((adr / 16) > 0 || i >= 0)
+		{
+			res[i--] = base[(adr % 16)];
+			adr /= 16;
+		}
 		res[i] = base[(adr % 16)];
-		adr /= 16;
-		i--;
+		return (ft_address(res, flag_buffer));
 	}
-	res[i] = base[(adr % 16)];
-	res[10] = '\0';
-	return (ft_address(res, flag_buffer));
+	return (ft_address(NULL, flag_buffer));
 }

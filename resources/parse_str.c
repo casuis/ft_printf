@@ -6,34 +6,31 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 13:13:36 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/16 22:48:43 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/07 13:55:18 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-t_flag			*ft_parse_conv(t_flag *flag_buff, va_list ap)
+t_flag			*ft_parse_conv(t_flag *flag_buffer, va_list ap)
 {
-	t_flag		*flag_buffer;
-
-	flag_buffer = (t_flag *)flag_buff;
-	if (flag_buffer->conv == 'c')
+	if (F_CONV == 'c')
 		flag_buffer = ft_convert_c(va_arg(ap, int), flag_buffer);
-	else if (flag_buffer->conv == 'd')
+	else if (F_CONV == 'd')
 		flag_buffer = ft_convert_d(va_arg(ap, int), flag_buffer);
-	else if (flag_buffer->conv == 'i')
+	else if (F_CONV == 'i')
 		flag_buffer = ft_convert_i(va_arg(ap, int), flag_buffer);
-	else if (flag_buffer->conv == 'p')
+	else if (F_CONV == 'p')
 		flag_buffer = ft_convert_p(va_arg(ap, long int*), flag_buffer);
-	else if (flag_buffer->conv == 's')
+	else if (F_CONV == 's')
 		flag_buffer = ft_convert_s(va_arg(ap, char*), flag_buffer);
-	else if (flag_buffer->conv == 'u')
+	else if (F_CONV == 'u')
 		flag_buffer = ft_convert_u(va_arg(ap, unsigned int), flag_buffer);
-	else if (flag_buffer->conv == 'x')
+	else if (F_CONV == 'x')
 		flag_buffer = ft_convert_x(va_arg(ap, int), flag_buffer);
-	else if (flag_buffer->conv == 'X')
+	else if (F_CONV == 'X')
 		flag_buffer = ft_convert_xx(va_arg(ap, int), flag_buffer);
-	else if (flag_buffer->conv == '%')
+	else if (F_CONV == '%')
 		flag_buffer = ft_convert_pourc(flag_buffer);
 	return (flag_buffer);
 }

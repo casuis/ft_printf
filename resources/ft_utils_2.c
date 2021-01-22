@@ -6,46 +6,26 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 14:15:34 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/17 00:20:06 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/21 09:10:33 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-char			*ft_create_table(void)
-{
-	char		*ret;
-
-	if (!(ret = malloc(sizeof(char) * 9)))
-		return (NULL);
-	ret[0] = 'c';
-	ret[1] = 'x';
-	ret[2] = 'X';
-	ret[3] = 'u';
-	ret[4] = 'p';
-	ret[5] = 'd';
-	ret[6] = 'i';
-	ret[7] = 's';
-	ret[8] = '\0';
-	return (ret);
-}
-
 t_flag			*ft_recup_min_max(char *str, t_flag *flag_buffer)
 {
 	int			i;
-	t_flag		*ret;
 
 	i = 0;
-	ret = (t_flag*)flag_buffer;
-	if (str[0] == '*')
+	if (str[0] == '*' || (str[0] == '-' && str[1] == '*'))
 	{
 		while (str[i] && str[i] != ' ' && str[i] != '.')
 			i++;
-		ret->max_size = ft_atoi(&str[i + 1]);
+		F_WIDTH_MAX = ft_atoi(&str[i + 1]);
 	}
-	else
-		ret->min_size = ft_atoi(&str[i]);
-	return (ret);
+	else if (F_WIDTH_MIN == '0')
+		F_WIDTH_MIN = ft_atoi(&str[i]);
+	return (flag_buffer);
 }
 
 size_t			ft_flag_spacing(int count, char c)
@@ -54,7 +34,52 @@ size_t			ft_flag_spacing(int count, char c)
 
 	i = 0;
 	if (count > 0)
+	{
 		while (i++ < count)
 			ft_putchar(c);
-	return (i - 1);
+		return (i - 1);
+	}
+	return (0);
+}
+
+char			*ft_strcpy(const char *src, char *dst)
+{
+	int		i;
+
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char		*ft_strconcat(char *str, char *conc)
+{
+	char	*ret;
+	char	*tmp;
+	char	*tmp2;
+	int		i;
+
+	i = 0;
+	tmp = str;
+	tmp2 = conc;
+	if (!(ret = malloc(sizeof(char) * (1 + ft_strlen((unsigned char *)str) +
+	ft_strlen((unsigned char *)conc)))))
+		return (NULL);
+	while (*str)
+	{
+		ret[i++] = *str;
+		str++;
+	}
+	while (*conc)
+	{
+		ret[i++] = *conc;
+		conc++;
+	}
+	free(tmp);
+	free(tmp2);
+	return (ret);
 }

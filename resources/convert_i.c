@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 01:46:14 by user42            #+#    #+#             */
-/*   Updated: 2020/11/18 01:59:09 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 11:21:52 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_flag		*ft_conv_o(char *str, t_flag *flag_buffer)
 
 	tmp = 0;
 	ret = (t_flag *)flag_buffer;
-	i = ft_strlen(str) - 1;
+	i = ft_strlen((unsigned char *)str) - 1;
 	while (i > 0)
 	{
 		tmp += ft_power(8, i) * (*str - 48);
@@ -38,8 +38,8 @@ static t_flag		*ft_conv_o(char *str, t_flag *flag_buffer)
 		str++;
 	}
 	tmp += *str - 48;
-	ret->ret_conv = ft_itoa(tmp);
-	ret->count_conv = ft_strlen(ft_itoa(tmp));
+	ret->ret_conv = (unsigned char *)ft_itoa(tmp);
+	ret->count_conv = ft_strlen((unsigned char *)ft_itoa(tmp));
 	return (ret);
 }
 
@@ -52,7 +52,7 @@ static t_flag		*ft_conv_h(char *base, char *str, t_flag *flag_buffer)
 
 	ret = (t_flag *)flag_buffer;
 	i = 0;
-	y = ft_strlen(str) - 1;
+	y = ft_strlen((unsigned char *)str) - 1;
 	tmp = 0;
 	str = ft_lower_case(str);
 	while (y > 0)
@@ -67,12 +67,12 @@ static t_flag		*ft_conv_h(char *base, char *str, t_flag *flag_buffer)
 	while (*str != base[i])
 		i++;
 	tmp += i;
-	ret->count_conv = ft_strlen(ft_itoa(tmp));
-	ret->ret_conv = ft_itoa(tmp);
+	ret->count_conv = ft_strlen((unsigned char *)ft_itoa(tmp));
+	ret->ret_conv = (unsigned char *)ft_itoa(tmp);
 	return (ret);
 }
 
-static char			*ft_mouv(char *str, t_flag *flag_buffer)
+char			*ft_mouv(char *str, t_flag *flag_buffer)
 {
 	t_flag		*buff;
 
@@ -80,7 +80,7 @@ static char			*ft_mouv(char *str, t_flag *flag_buffer)
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
-			flag_buffer->is_a_minus = 1;
+			F_IS_A_MINUS = 1;
 		str++;
 		if (*str == '+' && *str != *(str - 1))
 			str++;
@@ -90,26 +90,24 @@ static char			*ft_mouv(char *str, t_flag *flag_buffer)
 
 t_flag				*ft_convert_i(int str, t_flag *flag_buffer)
 {
-	t_flag		*ret;
 	int			i;
 	char		*tmp;
 
 	i = 0;
-	ret = (t_flag*)flag_buffer;
 	tmp = ft_itoa(str);
-	tmp = ft_mouv(tmp, ret);
+	tmp = ft_mouv(tmp, flag_buffer);
 	if (*tmp == '0' && *(tmp + 1))
 		tmp++;
 	if (*tmp == 'x' || *tmp == 'X')
 		tmp++;
-	if (ft_strlen(ft_parse(tmp)) == 8)
-		return (ft_conv_o(tmp, ret));
-	else if (ft_strlen(ft_parse(tmp)) == 16)
-		return (ft_conv_h(ft_parse(tmp), tmp, ret));
-	else if (ft_strlen(ft_parse(tmp)) == 10)
-		ret->ret_conv = tmp;
-	if (ret->is_a_minus == 1)
-		ret->ret_conv = ft_itoa(-(ft_atoi(ret->ret_conv)));
-	ret->count_conv = ft_strlen(ret->ret_conv);
-	return (ret);
+	if (ft_strlen((unsigned char *)ft_parse(tmp)) == 8)
+		return (ft_conv_o(tmp, flag_buffer));
+	else if (ft_strlen((unsigned char *)ft_parse(tmp)) == 16)
+		return (ft_conv_h(ft_parse(tmp), tmp, flag_buffer));
+	else if (ft_strlen((unsigned char *)ft_parse(tmp)) == 10)
+		F_RET_CONV = (unsigned char *)tmp;
+	if (F_IS_A_MINUS == 1)
+		F_RET_CONV = (unsigned char *)ft_itoa(-(ft_atoi((char *)F_RET_CONV)));
+	F_CONV_COUNT = ft_strlen(F_RET_CONV);
+	return (flag_buffer);
 }

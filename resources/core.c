@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:37:00 by asimon            #+#    #+#             */
-/*   Updated: 2020/12/15 05:55:40 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 18:54:00 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,41 @@ static t_flag			*ft_sconv(char *str, va_list ap)
 
 static size_t			ft_count_add(t_flag *flag_buffer, size_t count)
 {
-	if (flag_buffer->ret_count > 0)
+	if (F_RET_COUNT > 0)
 		count += F_RET_COUNT;
+	if (F_CONV == 'p' && F_MARK != 1)
+	{
+		free(F_PRE);
+		free(F_RET_CONV);
+	}
 	free(flag_buffer);
 	return (count);
 }
 
-size_t					ft_read_casu(char *str, va_list ap)
+size_t					ft_end(size_t count, char *str)
+{
+	free(str);
+	return (count);
+}
+
+size_t					ft_core(char *str, va_list ap)
 {
 	int			i;
 	size_t		count;
 	t_flag		*flag_buffer;
+	char		*tmp;
 
-	i = 0;
+	i = -1;
 	count = 0;
 	str = ft_protect_str(str);
-	while (str[i])
+	tmp = str;
+	while (str[++i])
 	{
 		if (str[i] == '%')
 		{
 			flag_buffer = ft_sconv(&str[i + 1], ap);
 			if (F_CONV != ' ')
 			{
-				flag_buffer = ft_parse_conv(flag_buffer, ap);
 				str = ft_flag_position(&str[++i], flag_buffer, ap);
 				i = 0;
 			}
@@ -59,26 +71,28 @@ size_t					ft_read_casu(char *str, va_list ap)
 		}
 		else if (str[i] != '%' && str[i] != '\0')
 			count += ft_putchar(str[i]);
-		i++;
 	}
-	return (count);
+	return (ft_end(count, tmp));
 }
 
-size_t			ft_printf(char *str, ...)
+int			ft_printf(char *str, ...)
 {
 	va_list		ap;
 	size_t		ret;
 
 	ret = 0;
 	va_start(ap, str);
-	ret = ft_read_casu(str, ap);
+	ret = ft_core(str, ap);
 	va_end(ap);
 	return (ret);
 }
 
 int main(int argc, const char *argv[])
 {
-	ft_printf((char *)argv[1], 0);
+	static char *s_hidden = "hi low\0don't print me lol";
+
+	ft_printf((char *)argv[1], atoi((char *)argv[2]), (char *)argv[3]);
 	ft_printf("\n");
+	//printf((char *)argv[1], s_hidden);
 	return 0;
 }

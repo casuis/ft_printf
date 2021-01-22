@@ -14,55 +14,55 @@
 t_flag			*ft_parse_flag_buffer(t_flag *flag_buffer, char *str)
 {
 	int				i;
-	t_flag			*ret;
 
 	i = 0;
-	ret = flag_buffer;
 	while (str[i] && str[i] != ' ' && str[i] != '%')
 	{
 		if (str[i] == '.' && (str[i + 1] != ' ' && str[i + 1] != '\0'))
-			ret->mark = 1;
+			F_MARK = 1;
 		if (str[i] == '-')
-			ret->minus = 1;
+			F_MINUS = 1;
 		if (str[i] == '0' && !(str[i - 1] >= '0' && str[i - 1] <= '9')
-				&& (str[i - 1] != '.') && flag_buffer->minus != 1)
-			ret->zero = 1;
-		if (str[i] == '*' && !(str[i - 1] >= '0' & str[i - 1] <= '9'))
-			ret->star += 1;
+			&& (str[i - 1] != '.') && F_MINUS != 1)
+			F_ZERO = 1;
+		if (str[i] == '*' && !(str[i - 1] > '0' & str[i - 1] <= '9'))
+			F_STAR += 1;
 		i++;
 	}
-	if (ret->mark == 0 && ret->zero == 0 && ret->star == 0 && ret->minus == 0)
-		ret->count = ft_atoi(str);
-	if (ret->minus == 1)
-		ret->zero = 0;
-	return (ret);
+	if (F_MARK == 0 && F_ZERO == 0 && F_STAR == 0 && F_MINUS == 0)
+		F_COUNT = ft_atoi(str);
+	if (F_MINUS == 1)
+		F_ZERO = 0;
+	return (flag_buffer);
 }
 
 t_flag			*ft_parse_mark_minus(char *str, t_flag *flag_buffer)
 {
 	int			i;
-	t_flag		*ret;
 
 	i = 0;
-	ret = flag_buffer;
-	if (ret->mark == 1 && !(ret->star > 0))
+	if (F_MARK == 1 && F_STAR == 0)
 	{
-		ret->min_size = ft_atoi(&str[i]);
-		if (ret->min_size < 0)
-			ret->min_size = -ret->min_size;
+		if (str[i] == '0')
+			while (!(str[i] >= '1' && str[i]<= '9') && str[i] != '.')
+				i++;
+		F_WIDTH_MIN = ft_atoi(&str[i]);
+		if (F_WIDTH_MIN < 0)
+			F_WIDTH_MIN = -F_WIDTH_MIN;
 		while (str[i] != '.')
 			i++;
-		ret->max_size = ft_atoi(&str[++i]);
-		return (ret);
+		F_WIDTH_MAX = ft_atoi(&str[++i]);
+		return (flag_buffer);
 	}
-	else if (!(flag_buffer->mark == 1))
+	else if (!(F_MARK == 1))
 	{
-		while (!(str[i] >= '0' && str[i] <= '9') && (str[i] && str[i] != ' '))
+		while (!(str[i] >= '0' && str[i] <= '9') && (str[i] && str[i] != ' ')
+		&& str[i] != '%')
 			i++;
-		ret->count = ft_atoi(&str[i]);
-		return (ret);
+		F_COUNT = ft_atoi(&str[i]);
+		return (flag_buffer);
 	}
-	return (ret);
+	return (flag_buffer);
 }
 
 t_flag			*ft_parse_star(char *str, t_flag *flag_buffer, va_list ap)
@@ -70,43 +70,44 @@ t_flag			*ft_parse_star(char *str, t_flag *flag_buffer, va_list ap)
 	int			i;
 
 	i = -1;
-	if (flag_buffer->star == 2 && flag_buffer->mark == 1)
+	if (F_STAR == 2 && F_MARK == 1)
 	{
-		flag_buffer->min_size = va_arg(ap, int);
-		flag_buffer->max_size = va_arg(ap, int);
+		F_WIDTH_MIN = va_arg(ap, int);
+		F_WIDTH_MAX = va_arg(ap, int);
 	}
-	else if (flag_buffer->star == 1 && flag_buffer->mark == 1)
+	else if (F_STAR == 1 && F_MARK == 1)
 	{
 		while (str[++i] && str[i] != ' ')
+		{
 			if (str[i] == '*' && str[i + 1] == '.')
-				flag_buffer->min_size = va_arg(ap, int);
+				F_WIDTH_MIN = va_arg(ap, int);
 			else if (str[i] == '*' && str[i - 1] == '.')
-				flag_buffer->max_size = va_arg(ap, int);
+				F_WIDTH_MAX = va_arg(ap, int);
+		}
 		flag_buffer = ft_recup_min_max(str, flag_buffer);
 	}
-	else if (flag_buffer->star == 1)
-		flag_buffer->count = va_arg(ap, int);
+	else if (F_STAR == 1)
+		F_COUNT = va_arg(ap, int);
 	return (flag_buffer);
 }
 
 t_flag			*ft_parse_utils(t_flag *flag_buffer)
 {
-	if (flag_buffer->mark == 1 && flag_buffer->min_size < 0)
+	if (F_MARK == 1 && F_WIDTH_MIN < 0)
 	{
-		flag_buffer->minus = 1;
-		flag_buffer->min_size = -flag_buffer->min_size;
+		F_MINUS = 1;
+		F_WIDTH_MIN = -F_WIDTH_MIN;
 	}
-	if (flag_buffer->mark == 1 &&
-	flag_buffer->max_size < 0 && flag_buffer->star < 2)
+	if (F_MARK == 1 && F_WIDTH_MAX < 0 && F_STAR < 2)
 	{
-		flag_buffer->minus = 1;
-		flag_buffer->min_size = -flag_buffer->max_size;
-		flag_buffer->max_size = 0;
+		F_MINUS = 1;
+		F_WIDTH_MIN = -F_WIDTH_MAX;
+		F_WIDTH_MAX = 0;
 	}
-	else if (flag_buffer->count < 0)
+	else if (F_COUNT < 0)
 	{
-		flag_buffer->count = -flag_buffer->count;
-		flag_buffer->minus = 1;
+		F_COUNT = -F_COUNT;
+		F_MINUS = 1;
 	}
 	return (flag_buffer);
 }

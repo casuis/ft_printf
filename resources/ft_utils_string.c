@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 16:43:00 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/17 19:20:44 by asimon           ###   ########.fr       */
+/*   Updated: 2020/12/21 16:59:15 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char		*ft_create(int len)
 	int		i;
 
 	i = 0;
+	ret = NULL;
 	if (!(ret = (char *)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	while (i < len + 1)
@@ -25,7 +26,7 @@ char		*ft_create(int len)
 	return (ret);
 }
 
-char		*ft_protect_str(const char *str)
+char		*ft_protect_str(char *str)
 {
 	int			i;
 	char		*ret;
@@ -73,7 +74,7 @@ char		*ft_upper_case(char *str)
 	return (str);
 }
 
-size_t		ft_strlen(char *str)
+size_t		ft_strlen(unsigned char *str)
 {
 	int		i;
 

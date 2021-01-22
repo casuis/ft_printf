@@ -6,22 +6,20 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 17:11:54 by user42            #+#    #+#             */
-/*   Updated: 2020/11/03 14:37:05 by asimon           ###   ########.fr       */
+/*   Updated: 2020/12/22 12:47:00 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-t_flag		*ft_convert_xx(int ptr, t_flag *flag_buffer)
+t_flag		*ft_convert_xx(unsigned int ptr, t_flag *flag_buffer)
 {
-	char		*base;
-	char		*buff;
-	int			i;
-	t_flag		*ret;
+	char				*base;
+	unsigned char		*buff;
+	int					i;
 
-	ret = (t_flag *)flag_buffer;
 	i = ft_count(ptr, 16);
-	buff = ft_create(i + 1);
+	buff = (unsigned char *)ft_create(i + 1);
 	base = "0123456789abcdef";
 	while (ptr / 16 > 0)
 	{
@@ -30,9 +28,8 @@ t_flag		*ft_convert_xx(int ptr, t_flag *flag_buffer)
 		i--;
 	}
 	buff[i] = base[ptr % 16];
-	buff = ft_upper_case(buff);
-	ret->ret_conv = buff;
-	ret->count_conv = ft_strlen(buff);
-	free(buff);
-	return (ret);
+	buff = (unsigned char *)ft_upper_case((char *)buff);
+	F_RET_CONV = buff;
+	F_CONV_COUNT = ft_strlen(buff);
+	return (flag_buffer);
 }
