@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 01:46:14 by user42            #+#    #+#             */
-/*   Updated: 2021/01/22 11:21:52 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:53:14 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_flag		*ft_conv_h(char *base, char *str, t_flag *flag_buffer)
 	return (ret);
 }
 
-char			*ft_mouv(char *str, t_flag *flag_buffer)
+char				*ft_mouv(char *str, t_flag *flag_buffer)
 {
 	t_flag		*buff;
 

@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/20 11:41:05 by user42            #+#    #+#             */
-/*   Updated: 2020/12/22 12:43:33 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:46:08 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_flag		*ft_convert_x(unsigned int ptr, t_flag *flag_buffer)
 {
 	char				*base;
 	unsigned char		*buff;
-	int			i;
+	int					i;
 
 	i = ft_count(ptr, 16);
 	if (!(buff = malloc(sizeof(char) * (i + 1))))

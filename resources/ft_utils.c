@@ -6,13 +6,13 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 21:04:10 by user42            #+#    #+#             */
-/*   Updated: 2020/12/15 05:44:44 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:49:28 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-size_t		ft_count(unsigned long long int  nb, int base)
+size_t		ft_count(unsigned long long int nb, int base)
 {
 	int		i;
 

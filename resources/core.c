@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:37:00 by asimon            #+#    #+#             */
-/*   Updated: 2021/01/22 18:54:00 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:54:09 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ size_t					ft_core(char *str, va_list ap)
 	return (ft_end(count, tmp));
 }
 
-int			ft_printf(char *str, ...)
+int						ft_printf(char *str, ...)
 {
 	va_list		ap;
 	size_t		ret;
@@ -85,14 +85,4 @@ int			ft_printf(char *str, ...)
 	ret = ft_core(str, ap);
 	va_end(ap);
 	return (ret);
-}
-
-int main(int argc, const char *argv[])
-{
-	static char *s_hidden = "hi low\0don't print me lol";
-
-	ft_printf((char *)argv[1], atoi((char *)argv[2]), (char *)argv[3]);
-	ft_printf("\n");
-	//printf((char *)argv[1], s_hidden);
-	return 0;
 }

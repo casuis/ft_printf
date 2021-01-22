@@ -6,19 +6,34 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 09:51:24 by asimon            #+#    #+#             */
-/*   Updated: 2021/01/22 18:38:25 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:52:19 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-static unsigned char			*ft_app_fil_blank(t_flag *flag_buffer, unsigned char *ret)
+static t_flag			*ft_utils_width(t_flag *flag_buffer)
+{
+	if (F_WIDTH_MAX < 0 && ((int)ft_strlen(F_RET_CONV) > -F_WIDTH_MAX))
+		F_WIDTH_MAX = ft_strlen(F_RET_CONV);
+	else if (F_WIDTH_MAX < 0 && ((int)ft_strlen(F_RET_CONV) < -F_WIDTH_MAX))
+	{
+		F_WIDTH_MAX = ft_strlen(F_RET_CONV);
+		if (F_IS_A_MINUS == 1)
+			F_WIDTH_MAX -= 1;
+	}
+	return (flag_buffer);
+}
+
+static unsigned char	*ft_app_fil_blank(t_flag *flag_buffer,
+unsigned char *ret)
 {
 	int			i;
 	int			y;
 
 	i = 0;
 	y = -1;
+	flag_buffer = ft_utils_width(flag_buffer);
 	if (F_WIDTH_MAX > 0)
 	{
 		if (F_IS_A_MINUS == 1)
@@ -39,7 +54,8 @@ static unsigned char			*ft_app_fil_blank(t_flag *flag_buffer, unsigned char *ret
 	return (ret);
 }
 
-size_t				ft_app_mark_minus(t_flag *flag_buffer, int count, unsigned char *ret)
+size_t					ft_app_mark_minus(t_flag *flag_buffer,
+int count, unsigned char *ret)
 {
 	size_t		ret_count;
 
@@ -60,7 +76,7 @@ size_t				ft_app_mark_minus(t_flag *flag_buffer, int count, unsigned char *ret)
 	return (ret_count);
 }
 
-size_t				ft_mark(t_flag *flag_buffer)
+size_t					ft_mark(t_flag *flag_buffer)
 {
 	unsigned char		*ret;
 	int					count;

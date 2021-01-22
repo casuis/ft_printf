@@ -1,11 +1,12 @@
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   parse_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/02 16:59:11 by asimon            #+#    #+#             */
-/*   Updated: 2020/11/17 01:16:48 by asimon           ###   ########.fr       */
+/*   Created: 2021/01/22 20:56:04 by asimon            #+#    #+#             */
+/*   Updated: 2021/01/22 20:57:00 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +45,7 @@ t_flag			*ft_parse_mark_minus(char *str, t_flag *flag_buffer)
 	if (F_MARK == 1 && F_STAR == 0)
 	{
 		if (str[i] == '0')
-			while (!(str[i] >= '1' && str[i]<= '9') && str[i] != '.')
+			while (!(str[i] >= '1' && str[i] <= '9') && str[i] != '.')
 				i++;
 		F_WIDTH_MIN = ft_atoi(&str[i]);
 		if (F_WIDTH_MIN < 0)
@@ -98,7 +99,7 @@ t_flag			*ft_parse_utils(t_flag *flag_buffer)
 		F_MINUS = 1;
 		F_WIDTH_MIN = -F_WIDTH_MIN;
 	}
-	if (F_MARK == 1 && F_WIDTH_MAX < 0 && F_STAR < 2)
+	if (F_MARK == 1 && F_WIDTH_MAX < 0 && F_STAR == 0)
 	{
 		F_MINUS = 1;
 		F_WIDTH_MIN = -F_WIDTH_MAX;

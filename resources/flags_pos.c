@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:12:45 by asimon            #+#    #+#             */
-/*   Updated: 2021/01/22 16:23:56 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:48:23 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ char		*ft_flag_position(char *str, t_flag *flag_buffer, va_list ap)
 	else if (F_CONV == 'c')
 		F_RET_COUNT += ft_putchar(F_RET_CONV[0]);
 	else
-		F_RET_COUNT += ft_putstr((unsigned char *)F_PRE) + ft_putstr(F_RET_CONV);
+		F_RET_COUNT += ft_putstr((unsigned char *)F_PRE) +
+		ft_putstr(F_RET_CONV);
 	while ((*str != F_CONV) && *str)
 		str++;
 	if (F_CONV == '%')

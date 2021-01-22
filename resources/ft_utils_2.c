@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 14:15:34 by asimon            #+#    #+#             */
-/*   Updated: 2021/01/21 09:10:33 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:55:21 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char			*ft_strcpy(const char *src, char *dst)
 	return (dst);
 }
 
-char		*ft_strconcat(char *str, char *conc)
+char			*ft_strconcat(char *str, char *conc)
 {
 	char	*ret;
 	char	*tmp;

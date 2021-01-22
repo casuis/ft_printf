@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 18:26:52 by user42            #+#    #+#             */
-/*   Updated: 2021/01/22 18:09:32 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:54:47 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static t_flag		*ft_address(char *str, t_flag *flag_buffer)
 	int				i;
 
 	i = -1;
-	if (!(F_RET_CONV = malloc(sizeof(char) * (ft_strlen((unsigned char *)str)))))
+	if (!(F_RET_CONV = malloc(sizeof(char) *
+	(ft_strlen((unsigned char *)str)))))
 		return (NULL);
 	if (!(F_PRE = malloc(sizeof(char) * 3)))
 		return (NULL);
