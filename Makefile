@@ -6,7 +6,7 @@
 #    By: asimon <asimon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 05:13:25 by asimon            #+#    #+#              #
-#    Updated: 2020/11/16 22:51:42 by asimon           ###   ########.fr        #
+#    Updated: 2020/12/11 10:20:08 by asimon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,16 +31,17 @@ CFILE		=	convert_c.c				\
 				convert_xx.c			\
 				flag_mark.c				\
 				flags_application.c		\
-				flags_pos.c		\
+				flags_pos.c				\
 				parse_flag.c			\
 				parse_str.c				\
 				ft_init.c				\
 				ft_itoa.c				\
+				ft_p_mod.c				\
 				ft_utils.c				\
 				ft_utils_2.c			\
 				ft_utils_print.c		\
 				ft_utils_string.c		\
-				read_utils.c						\
+				core.c					\
 
 OBJS		=	$(SRCS:.c=.o)
 
