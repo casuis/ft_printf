@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:37:00 by asimon            #+#    #+#             */
-/*   Updated: 2021/01/22 20:54:09 by asimon           ###   ########.fr       */
+/*   Updated: 2021/02/05 01:20:50 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,22 @@
 static t_flag			*ft_sconv(char *str, va_list ap)
 {
 	int			i;
-	t_flag		*flag_buffer;
+	t_flag		*fl;
 
 	i = -1;
-	flag_buffer = ft_create_flag_buffer();
-	while (str[++i] != ' ' && str[i] && F_CONV == ' ')
+	fl = ft_create_flag_buffer();
+	while (str[++i] != ' ' && str[i] && fl->conv == ' ')
 		if (ft_send_conv(str[i]) != 0 && ft_send_conv(str[i]) != -1)
-			F_CONV = ft_send_conv(str[i]);
-	if (F_CONV != ' ')
-		return (ft_parse_flag_core(str, flag_buffer, ap));
-	return (flag_buffer);
+			fl->conv = ft_send_conv(str[i]);
+	if (fl->conv != ' ')
+		return (ft_parse_flag_core(str, fl, ap));
+	return (fl);
 }
 
-static size_t			ft_count_add(t_flag *flag_buffer, size_t count)
+static size_t			ft_count_add(t_flag *fl, size_t count)
 {
-	if (F_RET_COUNT > 0)
-		count += F_RET_COUNT;
-	if (F_CONV == 'p' && F_MARK != 1)
-	{
-		free(F_PRE);
-		free(F_RET_CONV);
-	}
-	free(flag_buffer);
+	if (fl->ret_count > 0)
+		count += fl->ret_count;
 	return (count);
 }
 
@@ -50,7 +44,7 @@ size_t					ft_core(char *str, va_list ap)
 {
 	int			i;
 	size_t		count;
-	t_flag		*flag_buffer;
+	t_flag		*fl;
 	char		*tmp;
 
 	i = -1;
@@ -61,13 +55,13 @@ size_t					ft_core(char *str, va_list ap)
 	{
 		if (str[i] == '%')
 		{
-			flag_buffer = ft_sconv(&str[i + 1], ap);
-			if (F_CONV != ' ')
+			fl = ft_sconv(&str[i + 1], ap);
+			if (fl->conv != ' ')
 			{
-				str = ft_flag_position(&str[++i], flag_buffer, ap);
+				str = ft_flag_position(&str[++i], fl, ap);
 				i = 0;
 			}
-			count = ft_count_add(flag_buffer, count);
+			count = ft_count_add(fl, count);
 		}
 		else if (str[i] != '%' && str[i] != '\0')
 			count += ft_putchar(str[i]);

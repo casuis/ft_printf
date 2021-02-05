@@ -6,31 +6,34 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 18:26:52 by user42            #+#    #+#             */
-/*   Updated: 2021/01/22 20:54:47 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/26 20:04:07 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-static t_flag		*ft_address(char *str, t_flag *flag_buffer)
+static t_flag		*ft_address(char *str, t_flag *fl)
 {
 	int				i;
 
 	i = -1;
-	if (!(F_RET_CONV = malloc(sizeof(char) *
+	if (!(fl->ret_conv = malloc(sizeof(char) *
 	(ft_strlen((unsigned char *)str)))))
 		return (NULL);
-	if (!(F_PRE = malloc(sizeof(char) * 3)))
+	if (!(fl->prefix = malloc(sizeof(char) * 3)))
 		return (NULL);
 	if (str)
-		F_RET_CONV = (unsigned char *)ft_strcpy(str, (char *)F_RET_CONV);
+		fl->ret_conv = (unsigned char *)ft_strcpy(
+		(unsigned char *)str, fl->ret_conv);
 	else
-		F_RET_CONV = (unsigned char *)ft_strcpy("0", (char *)F_RET_CONV);
-	F_PRE = ft_strcpy("0x", F_PRE);
-	F_CONV_COUNT = ft_strlen(F_RET_CONV);
+		fl->ret_conv = (unsigned char *)ft_strcpy(
+		(unsigned char *)"0", fl->ret_conv);
+	fl->prefix = (char *)ft_strcpy(
+	(unsigned char *)"0x", (unsigned char *)fl->prefix);
+	fl->count_conv = ft_strlen(fl->ret_conv);
 	free(str);
 	str = NULL;
-	return (flag_buffer);
+	return (fl);
 }
 
 t_flag				*ft_convert_p(void *p, t_flag *flag_buffer)

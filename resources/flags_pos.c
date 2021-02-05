@@ -6,62 +6,77 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:12:45 by asimon            #+#    #+#             */
-/*   Updated: 2021/01/22 20:48:23 by asimon           ###   ########.fr       */
+/*   Updated: 2021/02/05 00:33:09 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-void		ft_flag_spacing_mark(t_flag *flag_buffer, int min, int max)
+void		ft_flag_spacing_mark(t_flag *fl, int min, int max)
 {
 	int		count;
 
 	count = 0;
 	if (max >= min)
 	{
-		count = max - F_CONV_COUNT;
-		if (F_IS_A_MINUS == 1)
+		count = max - fl->count_conv;
+		if (fl->is_a_minus == 1)
 			ft_putchar('-');
-		F_RET_COUNT += ft_flag_spacing(count, '0');
-		F_RET_COUNT += ft_putstr(F_RET_CONV);
+		fl->ret_count += ft_flag_spacing(count, '0');
+		fl->ret_count += ft_putstr(fl->ret_conv);
 	}
 	else if (min > max)
 	{
-		count = max - F_CONV_COUNT;
+		count = max - fl->count_conv;
 		if (max <= 0)
-			max = F_CONV_COUNT;
-		if (max < F_CONV_COUNT)
-			ft_flag_spacing(min - F_CONV_COUNT, ' ');
+			max = fl->count_conv;
+		if (max < fl->count_conv)
+			ft_flag_spacing(min - fl->count_conv, ' ');
 		else
-			F_RET_COUNT += ft_flag_spacing(min - max, ' ');
-		if (F_IS_A_MINUS == 1)
-			F_RET_COUNT += ft_putchar('-');
-		F_RET_COUNT += ft_flag_spacing(count, '0');
-		F_RET_COUNT += ft_putstr(F_RET_CONV);
+			fl->ret_count += ft_flag_spacing(min - max, ' ');
+		if (fl->is_a_minus == 1)
+			fl->ret_count += ft_putchar('-');
+		fl->ret_count += ft_flag_spacing(count, '0');
+		fl->ret_count += ft_putstr(fl->ret_conv);
 	}
 }
 
-char		*ft_flag_position(char *str, t_flag *flag_buffer, va_list ap)
+void		ft_free(t_flag *fl)
 {
-	flag_buffer = ft_parse_conv(flag_buffer, ap);
-	if (F_MINUS == 1 && F_STAR <= 1 && F_MARK != 1)
-		flag_buffer = ft_flag_minus(flag_buffer);
-	else if (F_MARK == 1)
-		F_RET_COUNT += ft_mark(flag_buffer);
-	else if (F_ZERO == 1)
-		flag_buffer = ft_flag_count_z(flag_buffer, '0');
-	else if (F_STAR == 1 && F_MARK != 1)
-		ft_flag_star(flag_buffer);
-	else if (F_COUNT > 0)
-		flag_buffer = ft_flag_count_z(flag_buffer, ' ');
-	else if (F_CONV == 'c')
-		F_RET_COUNT += ft_putchar(F_RET_CONV[0]);
+	int		a;
+
+	a = 0;
+	free(fl->ret_conv);
+	fl->ret_conv = NULL;
+	if (fl->conv == 'p')
+	{
+		free(fl->prefix);
+		fl->prefix = NULL;
+	}
+	free(fl);
+	fl = NULL;
+}
+
+char		*ft_flag_position(char *str, t_flag *fl, va_list ap)
+{
+	fl = ft_parse_conv(fl, ap);
+	if (fl->minus == 1 && fl->star <= 1 && fl->mark != 1)
+		fl = ft_flag_minus(fl);
+	else if (fl->mark == 1)
+		fl = ft_mark(fl);
+	else if (fl->zero == 1)
+		fl = ft_flag_count_z(fl, '0');
+	else if (fl->star == 1 && fl->mark != 1)
+		ft_flag_star(fl);
+	else if (fl->count > 0)
+		fl = ft_flag_count_z(fl, ' ');
+	else if (fl->conv == 'c')
+		fl->ret_count += ft_putchar(fl->ret_conv[0]);
 	else
-		F_RET_COUNT += ft_putstr((unsigned char *)F_PRE) +
-		ft_putstr(F_RET_CONV);
-	while ((*str != F_CONV) && *str)
+		fl->ret_count += ft_putstr((unsigned char *)fl->prefix) +
+		ft_putstr(fl->ret_conv);
+	while ((*str != fl->conv) && *str)
 		str++;
-	if (F_CONV == '%')
-		free(F_RET_CONV);
+	ft_free(fl);
 	return (str);
 }

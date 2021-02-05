@@ -6,13 +6,13 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 17:11:54 by user42            #+#    #+#             */
-/*   Updated: 2020/12/22 12:47:00 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/25 12:35:28 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-t_flag		*ft_convert_xx(unsigned int ptr, t_flag *flag_buffer)
+t_flag		*ft_convert_xx(unsigned int ptr, t_flag *fl)
 {
 	char				*base;
 	unsigned char		*buff;
@@ -29,7 +29,7 @@ t_flag		*ft_convert_xx(unsigned int ptr, t_flag *flag_buffer)
 	}
 	buff[i] = base[ptr % 16];
 	buff = (unsigned char *)ft_upper_case((char *)buff);
-	F_RET_CONV = buff;
-	F_CONV_COUNT = ft_strlen(buff);
-	return (flag_buffer);
+	fl->ret_conv = buff;
+	fl->count_conv = ft_strlen(buff);
+	return (fl);
 }

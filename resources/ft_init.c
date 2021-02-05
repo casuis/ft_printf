@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 18:27:50 by asimon            #+#    #+#             */
-/*   Updated: 2020/12/22 13:26:58 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/25 13:22:31 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_flag			*ft_create_flag_buffer(void)
 	ret->mark = 0;
 	ret->star = 0;
 	ret->zero = 0;
-	ret->min_size = 0;
-	ret->max_size = 0;
+	ret->min = 0;
+	ret->max = 0;
 	ret->conv = ' ';
 	ret->count = 0;
 	ret->ret_count = 0;

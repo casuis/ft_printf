@@ -6,13 +6,13 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 14:15:34 by asimon            #+#    #+#             */
-/*   Updated: 2021/01/22 20:55:21 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/26 19:58:56 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-t_flag			*ft_recup_min_max(char *str, t_flag *flag_buffer)
+t_flag			*ft_recup_min_max(char *str, t_flag *fl)
 {
 	int			i;
 
@@ -21,13 +21,12 @@ t_flag			*ft_recup_min_max(char *str, t_flag *flag_buffer)
 	{
 		while (str[i] && str[i] != ' ' && str[i] != '.')
 			i++;
-		F_WIDTH_MAX = ft_atoi(&str[i + 1]);
+		fl->max = ft_atoi(&str[i + 1]);
 	}
-	else if (F_WIDTH_MIN == '0')
-		F_WIDTH_MIN = ft_atoi(&str[i]);
-	return (flag_buffer);
+	else if (fl->min == '0')
+		fl->min = ft_atoi(&str[i]);
+	return (fl);
 }
-
 size_t			ft_flag_spacing(int count, char c)
 {
 	int			i;
@@ -42,7 +41,7 @@ size_t			ft_flag_spacing(int count, char c)
 	return (0);
 }
 
-char			*ft_strcpy(const char *src, char *dst)
+unsigned char			*ft_strcpy(const unsigned char *src, unsigned char *dst)
 {
 	int		i;
 

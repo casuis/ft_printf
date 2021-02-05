@@ -6,21 +6,21 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 22:44:37 by asimon            #+#    #+#             */
-/*   Updated: 2021/01/07 14:05:31 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/25 12:30:09 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-t_flag		*ft_convert_pourc(t_flag *flag_buffer)
+t_flag		*ft_convert_pourc(t_flag *fl)
 {
 	unsigned char		pour;
 
 	pour = 37;
-	if (!(F_RET_CONV = malloc(sizeof(unsigned char) * 2)))
+	if (!(fl->ret_conv = malloc(sizeof(unsigned char) * 2)))
 		return (NULL);
-	F_RET_CONV[0] = pour;
-	F_RET_CONV[1] = '\0';
-	F_CONV_COUNT = 1;
-	return (flag_buffer);
+	fl->ret_conv[0] = pour;
+	fl->ret_conv[1] = '\0';
+	fl->count_conv = 1;
+	return (fl);
 }

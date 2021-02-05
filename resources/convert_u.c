@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 21:23:04 by user42            #+#    #+#             */
-/*   Updated: 2020/12/22 12:41:59 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/25 12:32:59 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ static char			*ft_itoa2(unsigned int nb)
 	return (ret);
 }
 
-t_flag				*ft_convert_u(unsigned int nb, t_flag *flag_buffer)
+t_flag				*ft_convert_u(unsigned int nb, t_flag *fl)
 {
-	F_RET_CONV = (unsigned char *)ft_itoa2(nb);
-	F_CONV_COUNT = ft_strlen(F_RET_CONV);
-	return (flag_buffer);
+	fl->ret_conv = (unsigned char *)ft_itoa2(nb);
+	fl->count_conv = ft_strlen(fl->ret_conv);
+	return (fl);
 }

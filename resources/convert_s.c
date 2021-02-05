@@ -6,18 +6,19 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 14:25:25 by user42            #+#    #+#             */
-/*   Updated: 2021/01/22 16:10:51 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/26 20:12:23 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-t_flag		*ft_convert_s(char *str, t_flag *flag_buffer)
+t_flag		*ft_convert_s(char *str, t_flag *fl)
 {
+	fl->ret_conv = (unsigned char *)ft_create(ft_strlen((unsigned char *)str));
 	if (str)
-		F_RET_CONV = (unsigned char *)str;
+		fl->ret_conv = (unsigned char *)ft_strcpy((const unsigned char *)str, fl->ret_conv);
 	else
-		F_RET_CONV = (unsigned char*)"(null)";
-	F_CONV_COUNT = ft_strlen(F_RET_CONV);
-	return (flag_buffer);
+		fl->ret_conv = ft_strcpy((unsigned char*)"(null)", fl->ret_conv);
+	fl->count_conv = ft_strlen(fl->ret_conv);
+	return (fl);
 }

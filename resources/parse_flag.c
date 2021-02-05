@@ -6,13 +6,13 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/22 20:56:04 by asimon            #+#    #+#             */
-/*   Updated: 2021/01/22 20:57:00 by asimon           ###   ########.fr       */
+/*   Updated: 2021/01/25 13:32:55 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-t_flag			*ft_parse_flag_buffer(t_flag *flag_buffer, char *str)
+t_flag			*ft_parse_flag_buffer(t_flag *fl, char *str)
 {
 	int				i;
 
@@ -20,97 +20,97 @@ t_flag			*ft_parse_flag_buffer(t_flag *flag_buffer, char *str)
 	while (str[i] && str[i] != ' ' && str[i] != '%')
 	{
 		if (str[i] == '.' && (str[i + 1] != ' ' && str[i + 1] != '\0'))
-			F_MARK = 1;
+			fl->mark = 1;
 		if (str[i] == '-')
-			F_MINUS = 1;
+			fl->minus = 1;
 		if (str[i] == '0' && !(str[i - 1] >= '0' && str[i - 1] <= '9')
-			&& (str[i - 1] != '.') && F_MINUS != 1)
-			F_ZERO = 1;
+			&& (str[i - 1] != '.') && fl->minus != 1)
+			fl->zero = 1;
 		if (str[i] == '*' && !(str[i - 1] > '0' & str[i - 1] <= '9'))
-			F_STAR += 1;
+			fl->star += 1;
 		i++;
 	}
-	if (F_MARK == 0 && F_ZERO == 0 && F_STAR == 0 && F_MINUS == 0)
-		F_COUNT = ft_atoi(str);
-	if (F_MINUS == 1)
-		F_ZERO = 0;
-	return (flag_buffer);
+	if (fl->mark == 0 && fl->zero == 0 && fl->star == 0 && fl->minus == 0)
+		fl->count = ft_atoi(str);
+	if (fl->minus == 1)
+		fl->zero = 0;
+	return (fl);
 }
 
-t_flag			*ft_parse_mark_minus(char *str, t_flag *flag_buffer)
+t_flag			*ft_parse_mark_minus(char *str, t_flag *fl)
 {
 	int			i;
 
 	i = 0;
-	if (F_MARK == 1 && F_STAR == 0)
+	if (fl->mark == 1 && fl->star == 0)
 	{
 		if (str[i] == '0')
 			while (!(str[i] >= '1' && str[i] <= '9') && str[i] != '.')
 				i++;
-		F_WIDTH_MIN = ft_atoi(&str[i]);
-		if (F_WIDTH_MIN < 0)
-			F_WIDTH_MIN = -F_WIDTH_MIN;
+		fl->min = ft_atoi(&str[i]);
+		if (fl->min < 0)
+			fl->min = -fl->min;
 		while (str[i] != '.')
 			i++;
-		F_WIDTH_MAX = ft_atoi(&str[++i]);
-		return (flag_buffer);
+		fl->max = ft_atoi(&str[++i]);
+		return (fl);
 	}
-	else if (!(F_MARK == 1))
+	else if (!(fl->mark == 1))
 	{
 		while (!(str[i] >= '0' && str[i] <= '9') && (str[i] && str[i] != ' ')
 		&& str[i] != '%')
 			i++;
-		F_COUNT = ft_atoi(&str[i]);
-		return (flag_buffer);
+		fl->count = ft_atoi(&str[i]);
+		return (fl);
 	}
-	return (flag_buffer);
+	return (fl);
 }
 
-t_flag			*ft_parse_star(char *str, t_flag *flag_buffer, va_list ap)
+t_flag			*ft_parse_star(char *str, t_flag *fl, va_list ap)
 {
 	int			i;
 
 	i = -1;
-	if (F_STAR == 2 && F_MARK == 1)
+	if (fl->star == 2 && fl->mark == 1)
 	{
-		F_WIDTH_MIN = va_arg(ap, int);
-		F_WIDTH_MAX = va_arg(ap, int);
+		fl->min = va_arg(ap, int);
+		fl->max = va_arg(ap, int);
 	}
-	else if (F_STAR == 1 && F_MARK == 1)
+	else if (fl->star == 1 && fl->mark == 1)
 	{
 		while (str[++i] && str[i] != ' ')
 		{
 			if (str[i] == '*' && str[i + 1] == '.')
-				F_WIDTH_MIN = va_arg(ap, int);
+				fl->min = va_arg(ap, int);
 			else if (str[i] == '*' && str[i - 1] == '.')
-				F_WIDTH_MAX = va_arg(ap, int);
+				fl->max = va_arg(ap, int);
 		}
-		flag_buffer = ft_recup_min_max(str, flag_buffer);
+		fl = ft_recup_min_max(str, fl);
 	}
-	else if (F_STAR == 1)
-		F_COUNT = va_arg(ap, int);
-	return (flag_buffer);
+	else if (fl->star == 1)
+		fl->count = va_arg(ap, int);
+	return (fl);
 }
 
-t_flag			*ft_parse_utils(t_flag *flag_buffer)
+t_flag			*ft_parse_utils(t_flag *fl)
 {
-	if (F_MARK == 1 && F_WIDTH_MIN < 0)
+	if (fl->mark == 1 && fl->min < 0)
 	{
-		F_MINUS = 1;
-		F_WIDTH_MIN = -F_WIDTH_MIN;
+		fl->minus = 1;
+		fl->min = -fl->min;
 	}
-	if (F_MARK == 1 && F_WIDTH_MAX < 0 && F_STAR == 0)
+	if (fl->mark == 1 && fl->max < 0 && fl->star == 0)
 	{
-		F_MINUS = 1;
-		F_WIDTH_MIN = -F_WIDTH_MAX;
-		F_WIDTH_MAX = 0;
+		fl->minus = 1;
+		fl->min = -fl->max;
+		fl->max = 0;
 	}
-	else if (F_COUNT < 0)
+	else if (fl->count < 0)
 	{
-		F_COUNT = -F_COUNT;
-		F_MINUS = 1;
+		fl->count = -fl->count;
+		fl->minus = 1;
 	}
-	return (flag_buffer);
+	return (fl);
 }
 
 t_flag			*ft_parse_flag_core(char *str, t_flag *buffer, va_list ap)
