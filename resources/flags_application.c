@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 15:13:02 by asimon            #+#    #+#             */
-/*   Updated: 2021/02/05 01:23:56 by asimon           ###   ########.fr       */
+/*   Updated: 2021/02/05 01:26:42 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ t_flag				*ft_flag_count_z(t_flag *fl, unsigned char c)
 	if (fl->is_a_minus == 1 && fl->zero == 1)
 	{
 		fl->ret_count += ft_putchar('-');
-		fl->ret_conv = &(fl->ret_conv[1]);
+		tmp = (unsigned char *)ft_create(ft_strlen(&(fl->ret_conv[1])));
+		tmp = ft_strcpy(&(fl->ret_conv[1]), tmp);
+		free(fl->ret_conv);
+		fl->ret_conv = tmp;
 	}
 	fl->ret_count += ft_flag_spacing(count, c);
 	if (fl->conv == 'p')
