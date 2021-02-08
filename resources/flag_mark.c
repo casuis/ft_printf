@@ -6,7 +6,7 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 09:51:24 by asimon            #+#    #+#             */
-/*   Updated: 2021/02/05 01:20:18 by asimon           ###   ########.fr       */
+/*   Updated: 2021/02/08 19:02:26 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_flag					*ft_mark(t_flag *fl)
 	if (fl->conv != 'p')
 		ret = ft_app_fil_blank(fl, ret);
 	else
-		ret = (unsigned char *)ft_fill_blanc_p(fl, (char *)ret);
+		ret = ft_fill_blanc_p(fl, ret);
 	((int)ft_strlen(ret) < fl->min) ? (count = fl->min - ft_strlen(ret))
 	: (count = 0);
 	count = ft_app_mark_minus(fl, count, ret);

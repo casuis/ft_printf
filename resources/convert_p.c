@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 18:26:52 by user42            #+#    #+#             */
-/*   Updated: 2021/01/26 20:04:07 by asimon           ###   ########.fr       */
+/*   Updated: 2021/02/06 19:26:04 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static t_flag		*ft_address(char *str, t_flag *fl)
 	fl->prefix = (char *)ft_strcpy(
 	(unsigned char *)"0x", (unsigned char *)fl->prefix);
 	fl->count_conv = ft_strlen(fl->ret_conv);
-	free(str);
-	str = NULL;
+	ft_free(str);
 	return (fl);
 }
 

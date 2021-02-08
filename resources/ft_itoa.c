@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 20:53:26 by user42            #+#    #+#             */
-/*   Updated: 2020/11/03 14:37:46 by asimon           ###   ########.fr       */
+/*   Updated: 2021/02/08 21:26:24 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ static size_t		ft_count_nb(int nb)
 	return (ret);
 }
 
+static char			*ft_int_min(void)
+{
+	unsigned char	*str;
+
+	str = (unsigned char *)ft_create(12);
+	str = ft_strcpy((unsigned char *)"-2147483648", str);
+	return ((char *)str);
+}
+
 char				*ft_itoa(int nb)
 {
 	int		i;
@@ -34,7 +43,7 @@ char				*ft_itoa(int nb)
 	i = 0;
 	neg = 0;
 	if (nb == -2147483648)
-		return ("-2147483648");
+		return (ft_int_min());
 	if (nb < 0)
 	{
 		nb = -nb;

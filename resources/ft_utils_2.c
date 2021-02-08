@@ -6,13 +6,13 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 14:15:34 by asimon            #+#    #+#             */
-/*   Updated: 2021/01/26 19:58:56 by asimon           ###   ########.fr       */
+/*   Updated: 2021/02/08 21:57:34 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-t_flag			*ft_recup_min_max(char *str, t_flag *fl)
+t_flag					*ft_recup_min_max(char *str, t_flag *fl)
 {
 	int			i;
 
@@ -27,7 +27,8 @@ t_flag			*ft_recup_min_max(char *str, t_flag *fl)
 		fl->min = ft_atoi(&str[i]);
 	return (fl);
 }
-size_t			ft_flag_spacing(int count, char c)
+
+size_t					ft_flag_spacing(int count, char c)
 {
 	int			i;
 
@@ -55,30 +56,27 @@ unsigned char			*ft_strcpy(const unsigned char *src, unsigned char *dst)
 	return (dst);
 }
 
-char			*ft_strconcat(char *str, char *conc)
+unsigned char			*ft_strconcat(unsigned char *str, unsigned char *conc)
 {
-	char	*ret;
-	char	*tmp;
-	char	*tmp2;
-	int		i;
+	unsigned char	*ret;
+	unsigned char	*tmp;
+	unsigned char	*tmp2;
+	int				i;
+	int				y;
 
 	i = 0;
+	y = -1;
 	tmp = str;
 	tmp2 = conc;
 	if (!(ret = malloc(sizeof(char) * (1 + ft_strlen((unsigned char *)str) +
 	ft_strlen((unsigned char *)conc)))))
 		return (NULL);
-	while (*str)
-	{
-		ret[i++] = *str;
-		str++;
-	}
-	while (*conc)
-	{
-		ret[i++] = *conc;
-		conc++;
-	}
-	free(tmp);
-	free(tmp2);
+	ret = ft_strcpy(str, ret);
+	i = ft_strlen(ret);
+	while (conc[++y])
+		ret[i++] = conc[y];
+	ret[i] = '\0';
+	ft_free(tmp);
+	ft_free(tmp2);
 	return (ret);
 }

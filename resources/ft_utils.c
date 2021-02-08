@@ -6,7 +6,7 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 21:04:10 by user42            #+#    #+#             */
-/*   Updated: 2021/01/22 20:49:28 by asimon           ###   ########.fr       */
+/*   Updated: 2021/02/05 21:05:23 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,10 @@ int			ft_atoi(char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 		ret = (ret * 10) + (str[i++] - 48);
 	return (ret * neg);
+}
+
+void		ft_free(void *ptr)
+{
+	free(ptr);
+	ptr = NULL;
 }

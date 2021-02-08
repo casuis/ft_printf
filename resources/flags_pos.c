@@ -6,13 +6,13 @@
 /*   By: asimon <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:12:45 by asimon            #+#    #+#             */
-/*   Updated: 2021/02/05 00:33:09 by asimon           ###   ########.fr       */
+/*   Updated: 2021/02/08 21:55:01 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-void		ft_flag_spacing_mark(t_flag *fl, int min, int max)
+void			ft_flag_spacing_mark(t_flag *fl, int min, int max)
 {
 	int		count;
 
@@ -41,23 +41,15 @@ void		ft_flag_spacing_mark(t_flag *fl, int min, int max)
 	}
 }
 
-void		ft_free(t_flag *fl)
+static void		ft_fbuff(t_flag *fl)
 {
-	int		a;
-
-	a = 0;
-	free(fl->ret_conv);
-	fl->ret_conv = NULL;
+	ft_free(fl->ret_conv);
 	if (fl->conv == 'p')
-	{
-		free(fl->prefix);
-		fl->prefix = NULL;
-	}
-	free(fl);
-	fl = NULL;
+		ft_free(fl->prefix);
+	ft_free(fl);
 }
 
-char		*ft_flag_position(char *str, t_flag *fl, va_list ap)
+char			*ft_flag_position(char *str, t_flag *fl, va_list ap)
 {
 	fl = ft_parse_conv(fl, ap);
 	if (fl->minus == 1 && fl->star <= 1 && fl->mark != 1)
@@ -74,9 +66,9 @@ char		*ft_flag_position(char *str, t_flag *fl, va_list ap)
 		fl->ret_count += ft_putchar(fl->ret_conv[0]);
 	else
 		fl->ret_count += ft_putstr((unsigned char *)fl->prefix) +
-		ft_putstr(fl->ret_conv);
+			ft_putstr(fl->ret_conv);
 	while ((*str != fl->conv) && *str)
 		str++;
-	ft_free(fl);
+	ft_fbuff(fl);
 	return (str);
 }

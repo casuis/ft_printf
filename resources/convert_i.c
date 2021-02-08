@@ -6,13 +6,13 @@
 /*   By: user42 <asimon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 01:46:14 by user42            #+#    #+#             */
-/*   Updated: 2021/02/05 01:16:49 by asimon           ###   ########.fr       */
+/*   Updated: 2021/02/08 21:59:16 by asimon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/printf.h"
 
-static char			*ft_parse(unsigned char *str)
+static char					*ft_parse(unsigned char *str)
 {
 	if (str[0] == '0' && str[1] != 'x')
 		return ("01234567");
@@ -22,7 +22,7 @@ static char			*ft_parse(unsigned char *str)
 		return ("0123456789");
 }
 
-static t_flag		*ft_conv_o(unsigned char *str, t_flag *flag_buffer)
+static t_flag				*ft_conv_o(unsigned char *str, t_flag *flag_buffer)
 {
 	int			tmp;
 	int			i;
@@ -43,7 +43,7 @@ static t_flag		*ft_conv_o(unsigned char *str, t_flag *flag_buffer)
 	return (ret);
 }
 
-static t_flag		*ft_conv_h(
+static t_flag				*ft_conv_h(
 char *base, unsigned char *str, t_flag *flag_buffer)
 {
 	int			i;
@@ -91,18 +91,18 @@ static unsigned char		*ft_mouv(unsigned char *str, t_flag *flag_buffer)
 	}
 	tmp = (unsigned char *)ft_create(ft_strlen(ret_buff));
 	tmp = ft_strcpy(ret_buff, tmp);
-	free(str);
+	ft_free(str);
 	str = tmp;
 	return (str);
 }
 
-t_flag				*ft_convert_i(int str, t_flag *fl)
+t_flag						*ft_convert_i(int nb, t_flag *fl)
 {
 	int					i;
 	unsigned char		*tmp;
 
 	i = 0;
-	tmp = (unsigned char *)ft_itoa(str);
+	tmp = (unsigned char *)ft_itoa(nb);
 	tmp = ft_mouv(tmp, fl);
 	if (*tmp == '0' && *(tmp + 1))
 		tmp++;
